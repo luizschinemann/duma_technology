@@ -18,27 +18,26 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className={`${inter.className} bg-background text-secondary`}>
-        <header className="bg-primary text-background p-4 shadow-md">
+      <body className={inter.className}>
+        <header className="bg-gray-800 text-white p-4">
           <nav className="container mx-auto flex justify-between items-center">
             <Link href="/" className="flex items-center">
-              <Image src="/images/logo.png" alt="Duma Tech Logo" width={50} height={50} className="mr-3" />
-              <span className="text-2xl font-bold text-accent">Duma Tech</span>
+              <Image src="/images/logo.png" alt="Duma Tech Logo" width={40} height={40} className="mr-2" />
+              <span className="text-xl font-bold">Duma Tech</span>
             </Link>
-            <ul className="flex space-x-6">
-              <li><Link href="/" className="hover:text-accent transition-colors duration-300">Home</Link></li>
-              <li><Link href="/sobre" className="hover:text-accent transition-colors duration-300">Sobre Nós</Link></li>
-              <li><Link href="/servicos" className="hover:text-accent transition-colors duration-300">Serviços</Link></li>
-              <li><Link href="/contato" className="hover:text-accent transition-colors duration-300">Contato</Link></li>
+            <ul className="flex space-x-4">
+              <li><Link href="/" className="hover:text-gray-300">Home</Link></li>
+              <li><Link href="/sobre" className="hover:text-gray-300">Sobre Nós</Link></li>
+              <li><Link href="/servicos" className="hover:text-gray-300">Serviços</Link></li>
+              <li><Link href="/contato" className="hover:text-gray-300">Contato</Link></li>
             </ul>
           </nav>
         </header>
-        <main className="container mx-auto p-6 min-h-[calc(100vh-200px)]">
+        <main className="container mx-auto p-4">
           {children}
         </main>
-        <footer className="bg-secondary text-background text-center p-6 mt-10">
+        <footer className="bg-gray-700 text-white text-center p-4 mt-8">
           <p>&copy; {new Date().getFullYear()} Duma Tech. Todos os direitos reservados.</p>
-          <p className="text-sm mt-1">Desenvolvido com paixão por automação.</p>
         </footer>
       </body>
     </html>
