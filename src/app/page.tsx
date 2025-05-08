@@ -1,0 +1,51 @@
+export default function HomePage() {
+  return (
+    <div className="space-y-12">
+      <section className="text-center py-16 bg-primary text-background rounded-lg shadow-xl">
+        <h1 className="text-5xl font-bold mb-6">Duma Tech: Inovação em Automação de Processos</h1>
+        <p className="text-xl mb-10 max-w-3xl mx-auto">
+          Transformamos seus desafios operacionais em soluções eficientes e automatizadas. Na Duma Tech, impulsionamos o crescimento da sua empresa através da tecnologia de ponta em automação, otimizando seu tempo e recursos para que você possa focar no que realmente importa: o seu negócio.
+        </p>
+        <a href="/servicos" className="bg-accent text-primary font-semibold py-3 px-10 rounded-lg hover:bg-yellow-400 transition duration-300 text-lg shadow-md">
+          Conheça Nossas Soluções
+        </a>
+      </section>
+
+      <section className="py-12">
+        <h2 className="text-4xl font-semibold text-primary mb-10 text-center">Por que Automatizar com a Duma Tech?</h2>
+        <div className="grid md:grid-cols-3 gap-10 text-center">
+          <div className="p-8 bg-background rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 border border-primary/20">
+            <h3 className="text-2xl font-semibold text-primary mb-4">Eficiência Operacional</h3>
+            <p className="text-secondary leading-relaxed">
+              Reduzimos drasticamente o tempo gasto em tarefas manuais e repetitivas. Nossas soluções de automação são projetadas para executar processos complexos com precisão e velocidade, liberando sua equipe para atividades estratégicas e de maior valor agregado. Maximizamos sua produtividade e minimizamos erros.
+            </p>
+          </div>
+          <div className="p-8 bg-background rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 border border-primary/20">
+            <h3 className="text-2xl font-semibold text-primary mb-4">Redução de Custos</h3>
+            <p className="text-secondary leading-relaxed">
+              A automação inteligente de processos resulta em uma significativa diminuição dos custos operacionais. Ao otimizar fluxos de trabalho e eliminar gargalos, sua empresa economiza recursos financeiros e humanos, direcionando investimentos para áreas que geram crescimento e inovação.
+            </p>
+          </div>
+          <div className="p-8 bg-background rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 border border-primary/20">
+            <h3 className="text-2xl font-semibold text-primary mb-4">Escalabilidade e Inovação</h3>
+            <p className="text-secondary leading-relaxed">
+              Nossas plataformas de automação são flexíveis e escaláveis, adaptando-se ao crescimento da sua empresa. Oferecemos desde automações via WhatsApp e desenvolvimento de Lambdas até implementações robustas de RPA, garantindo que sua operação esteja sempre à frente, pronta para os desafios do futuro.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-12 bg-secondary/5 rounded-lg shadow-inner">
+        <h2 className="text-4xl font-semibold text-primary mb-8 text-center">Nossos Principais Serviços de Automação</h2>
+        <p className="text-lg text-secondary mb-10 max-w-3xl mx-auto text-center leading-relaxed">
+          A Duma Tech oferece um portfólio completo de serviços de automação, desenhados para atender às necessidades específicas de cada cliente. Nossa expertise abrange diversas tecnologias e plataformas, garantindo soluções personalizadas e de alto impacto. Desde a automatização de interações com clientes até a otimização de back-office, estamos preparados para revolucionar seus processos.
+        </p>
+        <div className="text-center">
+            <a href="/servicos" className="bg-accent text-primary font-semibold py-3 px-10 rounded-lg hover:bg-yellow-400 transition duration-300 text-lg shadow-md">
+              Explore Nossos Serviços
+            </a>
+        </div>
+      </section>
+    </div>
+  );
+}
