@@ -2,24 +2,25 @@ export default function ServicosPage() {
   return (
     <div className="space-y-8 py-10">
       <section className="text-center">
-        <h1 className="text-4xl font-bold text-gray-800 mb-4">Nossos Serviços de Automação</h1>
+        <h1 className="mx-auto mt-2 max-w-lg text-center text-4xl font-semibold tracking-tight text-balance text-gradient_start sm:text-5xl">Nossos Serviços de Automação</h1>
         <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-          Na Duma Tech, oferecemos um leque abrangente de soluções de automação projetadas para otimizar seus processos de negócios, aumentar a eficiência e impulsionar o crescimento. Nossa abordagem é personalizada, entendendo as particularidades de cada cliente para entregar a tecnologia mais adequada e impactante. Explore como podemos transformar sua operação.
+          Na Duma, oferecemos um leque abrangente de soluções de automação projetadas para otimizar seus processos de negócios, aumentar a eficiência e impulsionar o crescimento. Nossa abordagem é personalizada, entendendo as particularidades de cada cliente para entregar a tecnologia mais adequada e impactante. Explore como podemos transformar sua operação.
         </p>
       </section>
 
-      <section className="bg-gray-50 p-8 rounded-lg shadow-md">
-        <h2 className="text-3xl font-semibold text-blue-600 mb-3">Automação de Atendimento e Comunicação via WhatsApp</h2>
+      <section className="p-8 rounded-lg">
+        <h2 className="text-3xl font-semibold text-gradient_start mb-3">Automação de Atendimento e Comunicação via Messengers(WhatsApp, Telegram)</h2>
         <p className="text-gray-700 mb-4 leading-relaxed">
-          Revolucione a forma como sua empresa interage com os clientes utilizando o poder do WhatsApp. Desenvolvemos chatbots inteligentes e fluxos de automação que permitem um atendimento ágil, personalizado e disponível 24/7. Desde o suporte inicial, qualificação de leads, envio de notificações importantes, até a conclusão de vendas, nossas soluções de automação para WhatsApp melhoram a experiência do cliente e otimizam o tempo da sua equipe, permitindo que se concentrem em interações de maior valor.
+          Revolucione a forma como sua empresa interage com os clientes utilizando o poder do WhatsApp e Telegram. Desenvolvemos chatbots inteligentes e fluxos de automação que permitem um atendimento ágil, personalizado e disponível 24/7. Desde o suporte inicial, qualificação de leads, envio de notificações importantes, até a conclusão de vendas, nossas soluções de automação para WhatsApp melhoram a experiência do cliente e otimizam o tempo da sua equipe, permitindo que se concentrem em interações de maior valor.
         </p>
         <p className="text-gray-700 leading-relaxed">
           Nossas implementações são seguras, escaláveis e integradas com seus sistemas existentes, como CRMs e plataformas de e-commerce. Imagine poder responder instantaneamente a milhares de clientes, realizar pesquisas de satisfação de forma automática ou gerenciar agendamentos sem intervenção humana. Com a Duma Tech, a comunicação eficiente e automatizada via WhatsApp se torna uma realidade palpável para o seu negócio, fortalecendo o relacionamento com seu público e impulsionando seus resultados.
         </p>
+        <img src="/images/telegramflow.png" width={600} className="p-10" />
       </section>
 
       <section className="p-8">
-        <h2 className="text-3xl font-semibold text-blue-600 mb-3">Desenvolvimento de Funções Serverless (Lambdas)</h2>
+        <h2 className="text-3xl font-semibold text-gradient_start mb-3">Desenvolvimento de Funções Serverless (Lambdas)</h2>
         <p className="text-gray-700 mb-4 leading-relaxed">
           Aproveite a flexibilidade e a escalabilidade da computação serverless com nossas soluções de desenvolvimento de Lambdas (AWS Lambda) e funções equivalentes em outras plataformas cloud. Criamos funções sob medida para executar tarefas específicas em resposta a eventos, sem a necessidade de gerenciar servidores. Isso significa que você paga apenas pelo tempo de computação que utiliza, resultando em uma economia significativa de custos e em uma infraestrutura mais ágil.
         </p>
@@ -29,7 +30,7 @@ export default function ServicosPage() {
       </section>
 
       <section className="bg-gray-50 p-8 rounded-lg shadow-md">
-        <h2 className="text-3xl font-semibold text-blue-600 mb-3">Automação Robótica de Processos (RPA)</h2>
+        <h2 className="text-3xl font-semibold text-gradient_start mb-3">Automação Robótica de Processos (RPA)</h2>
         <p className="text-gray-700 mb-4 leading-relaxed">
           A Automação Robótica de Processos (RPA) é uma tecnologia poderosa para automatizar tarefas repetitivas e baseadas em regras que normalmente são executadas por humanos em sistemas digitais. Na Duma Tech, implementamos soluções de RPA que utilizam "robôs" de software para interagir com aplicações da mesma forma que uma pessoa faria: preenchendo formulários, extraindo dados, movendo arquivos, e muito mais. Isso libera seus colaboradores de trabalhos monótonos e propensos a erros, permitindo que se concentrem em atividades mais estratégicas e criativas.
         </p>
@@ -39,7 +40,7 @@ export default function ServicosPage() {
       </section>
 
       <section className="p-8">
-        <h2 className="text-3xl font-semibold text-blue-600 mb-3">Integração de Sistemas e APIs</h2>
+        <h2 className="text-3xl font-semibold text-gradient_start mb-3">Integração de Sistemas e APIs</h2>
         <p className="text-gray-700 mb-4 leading-relaxed">
           Em um mundo cada vez mais conectado, a capacidade de integrar diferentes sistemas e aplicações é crucial para a eficiência operacional. A Duma Tech é especialista em criar pontes entre suas diversas plataformas de software, garantindo que os dados fluam de maneira contínua e segura. Desenvolvemos integrações customizadas utilizando APIs (Interfaces de Programação de Aplicativos) e outras tecnologias de middleware, permitindo que seus sistemas trabalhem em conjunto de forma harmoniosa.
         </p>

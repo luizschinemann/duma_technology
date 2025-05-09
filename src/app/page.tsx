@@ -2,7 +2,7 @@ export default function HomePage() {
   return (
     <div className="space-y-8">       
        <img src="/images/background.png" />
-      <section className="text-center py-12  text-black  shadow-xl">
+      <section className="text-center py-14  text-white bg-gradient-to-r from-gradient_start to-gradient_end rounded-lg shadow-lg">
         <h1 className="text-5xl font-bold mb-4">Duma: Inovação em Automação de Processos</h1>
         <p className="text-xl mb-8 max-w-2xl mx-auto">
           Transformamos seus desafios operacionais em soluções eficientes e automatizadas. Na Duma, impulsionamos o crescimento da sua empresa através da tecnologia de ponta em automação, otimizando seu tempo e recursos para que você possa focar no que realmente importa: o seu negócio.
@@ -13,7 +13,7 @@ export default function HomePage() {
       </section>
 
       <section className="py-10">
-        <h2 className="text-3xl font-semibold text-white mb-6 text-center">Por que Automatizar com a Duma?</h2>
+        <h2 className="text-3xl font-semibold text-gradient_start mb-6 text-center">Por que Automatizar com a Duma?</h2>
         <div className="grid md:grid-cols-3 gap-8 text-center">
           <div className="p-6 bg-white rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
             <h3 className="text-2xl font-semibold text-primary mb-3">Eficiência Operacional</h3>
