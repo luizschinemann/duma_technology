@@ -10,7 +10,7 @@ export default {
   theme: {
   	extend: {
   		colors: {
-			background: '#F5EFE6',
+			background: '#f4f3ed',
   			foreground: '#F5EFE6',
   			sidebar: {
   				DEFAULT: '1A2B3C',
@@ -33,7 +33,9 @@ export default {
 			primary: '#1A2B3C',       // Azul petróleo profundo
 			secondary: '#3A3A3A',     // Cinza grafite
 			accent: '#1A2B3C',        // Dourado elétrico suave,
-  			muted: {
+  			gradient_start:'#073763',
+			gradient_end:'#6ce5e8',
+			muted: {
   				DEFAULT: 'hsl(var(--muted))',
   				foreground: 'hsl(var(--muted-foreground))'
   			},  			
