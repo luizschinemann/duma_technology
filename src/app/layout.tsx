@@ -21,11 +21,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <header className="bg-gray-800 text-white p-4">
           <nav className="container mx-auto flex justify-between items-center">
-            <Link href="/" className="flex items-center">
-              <Image src="/images/logo.png" alt="Duma Tech Logo" width={40} height={40} className="mr-2" />
-              <span className="text-xl font-bold">Duma Tech</span>
-            </Link>
-            <ul className="flex space-x-4">
+            <ul className="flex space-x-8">
               <li><Link href="/" className="hover:text-gray-300">Home</Link></li>
               <li><Link href="/sobre" className="hover:text-gray-300">Sobre Nós</Link></li>
               <li><Link href="/servicos" className="hover:text-gray-300">Serviços</Link></li>

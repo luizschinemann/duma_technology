@@ -4,8 +4,12 @@ export default function SobrePage() {
       <section className="text-center">
         <h1 className="text-4xl font-bold text-gray-800 mb-4">Sobre a Duma Tech</h1>
         <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-          A Duma Tech nasceu da visão de que a tecnologia pode e deve ser uma aliada estratégica para o crescimento e a eficiência das empresas. Somos apaixonados por inovação e dedicados a transformar processos complexos em operações simples, ágeis e automatizadas. Nossa jornada é marcada pela busca constante por soluções que não apenas resolvam problemas, mas que também abram novas oportunidades para nossos clientes.
-        </p>
+        Na língua Zulu, Duma significa “trovão” — símbolo de força, presença marcante e transformação. Essa palavra ancestral inspira não apenas nosso nome, mas também nossa essência: causar impacto onde antes havia silêncio, trazer movimento onde havia estagnação.
+
+A Duma Tech nasceu da visão de que a tecnologia pode — e deve — ser uma aliada estratégica no crescimento e na eficiência das empresas. Somos apaixonados por inovação e dedicados a transformar processos complexos em operações simples, ágeis e automatizadas.
+
+Assim como o trovão antecede a mudança no céu, nossa missão é antecipar soluções, eliminar ruídos operacionais e abrir caminho para novas oportunidades. Nossa jornada é guiada por um propósito claro: entregar soluções tecnológicas que não apenas resolvem problemas, mas que impulsionam o futuro dos nossos clientes com inteligência, impacto e propósito.
+ </p>
       </section>
 
       <section className="bg-gray-50 p-8 rounded-lg shadow-md">

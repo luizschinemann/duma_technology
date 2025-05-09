@@ -10,10 +10,10 @@ export default {
   theme: {
   	extend: {
   		colors: {
-  			background: 'hsl(var(--background))',
-  			foreground: 'hsl(var(--foreground))',
+			background: '#F5EFE6',
+  			foreground: '#F5EFE6',
   			sidebar: {
-  				DEFAULT: 'hsl(var(--sidebar-background))',
+  				DEFAULT: '1A2B3C',
   				foreground: 'hsl(var(--sidebar-foreground))',
   				primary: 'hsl(var(--sidebar-primary))',
   				'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
@@ -23,31 +23,22 @@ export default {
   				ring: 'hsl(var(--sidebar-ring))'
   			},
   			card: {
-  				DEFAULT: 'hsl(var(--card))',
-  				foreground: 'hsl(var(--card-foreground))'
+  				DEFAULT: '#F5EFE6',
+  				foreground: '#F5EFE6'
   			},
   			popover: {
   				DEFAULT: 'hsl(var(--popover))',
   				foreground: 'hsl(var(--popover-foreground))'
   			},
-  			primary: {
-  				DEFAULT: 'hsl(var(--primary))',
-  				foreground: 'hsl(var(--primary-foreground))'
-  			},
-  			secondary: {
-  				DEFAULT: 'hsl(var(--secondary))',
-  				foreground: 'hsl(var(--secondary-foreground))'
-  			},
+			primary: '#1A2B3C',       // Azul petróleo profundo
+			secondary: '#3A3A3A',     // Cinza grafite
+			accent: '#1A2B3C',        // Dourado elétrico suave,
   			muted: {
   				DEFAULT: 'hsl(var(--muted))',
   				foreground: 'hsl(var(--muted-foreground))'
-  			},
-  			accent: {
-  				DEFAULT: 'hsl(var(--accent))',
-  				foreground: 'hsl(var(--accent-foreground))'
-  			},
+  			},  			
   			destructive: {
-  				DEFAULT: 'hsl(var(--destructive))',
+  				DEFAULT: '#F5EFE6',
   				foreground: 'hsl(var(--destructive-foreground))'
   			},
   			border: 'hsl(var(--border))',
@@ -60,7 +51,13 @@ export default {
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
   			}
+			
   		},
+		backgroundImage: {
+			'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+			'gradient-conic':
+			  'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+		},
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
