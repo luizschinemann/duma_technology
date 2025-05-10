@@ -25,7 +25,7 @@ export default function SobrePage() {
               <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5 lg:rounded-l-[2rem]"></div>
             </div>
             <div className="relative max-lg:row-start-1">
-              <div className="absolute inset-px rounded-lg bg-background "></div>
+              <div className="absolute inset-px rounded-lg bg-background_two "></div>
               <div className="relative flex h-full flex-col overflow-hidden ">
                 <img
                   className="w-full max-lg:max-w-xs p-5"
@@ -44,7 +44,7 @@ export default function SobrePage() {
       <section className="bg-gray-50 p-8 rounded-lg shadow-md">
         <h2 className="text-3xl font-semibold text-gradient_start mb-6 text-center">Nossa História e Missão</h2>
         <p className="text-gray-700 mb-4 leading-relaxed">
-          Fundada por um grupo de especialistas em tecnologia e gestão de processos, a Duma rapidamente se estabeleceu como uma referência em automação. Desde o início, nosso foco tem sido entender profundamente as necessidades de cada cliente para oferecer soluções verdadeiramente personalizadas e eficazes. Acreditamos que a automação vai além da simples implementação de software; trata-se de uma reengenharia inteligente dos fluxos de trabalho, visando a otimização contínua e a sustentabilidade do negócio.
+          Fundada para ser referência em automação. Desde o início, nosso foco tem sido entender profundamente as necessidades de cada cliente para oferecer soluções verdadeiramente personalizadas e eficazes. Acreditamos que a automação vai além da simples implementação de software; trata-se de uma reengenharia inteligente dos fluxos de trabalho, visando a otimização contínua e a sustentabilidade do negócio.
         </p>
         <p className="text-gray-700 leading-relaxed">
           Nossa missão é capacitar empresas de todos os portes a alcançar seu pleno potencial através da automação inteligente. Buscamos ser o parceiro tecnológico que não apenas entrega resultados, mas que também educa e inspira seus clientes a abraçar a transformação digital como um caminho para o sucesso duradouro. Queremos desmistificar a automação, tornando-a acessível e compreensível para todos.
@@ -54,7 +54,7 @@ export default function SobrePage() {
       <section className="p-8">
         <h2 className="text-3xl font-semibold text-gradient_start mb-6 text-center">Nossa Visão e Valores</h2>
         <p className="text-gray-700 mb-4 leading-relaxed">
-          Almejamos ser líderes no mercado de automação de processos, reconhecidos pela excelência de nossas soluções e pelo impacto positivo que geramos nos negócios de nossos clientes. Enxergamos um futuro onde a automação e a inteligência artificial trabalham em harmonia com as equipes humanas, potencializando suas capacidades e criando ambientes de trabalho mais produtivos e satisfatórios.
+          Almejamos figurar entre os líderes no mercado de automação de processos, reconhecidos pela excelência de nossas soluções e pelo impacto positivo que geramos nos negócios de nossos clientes. Enxergamos um futuro onde a automação e a inteligência artificial trabalham em harmonia com as equipes humanas, potencializando suas capacidades e criando ambientes de trabalho mais produtivos e satisfatórios.
         </p>
         <p className="text-gray-700 leading-relaxed">
           Nossos valores são o alicerce de tudo o que fazemos:

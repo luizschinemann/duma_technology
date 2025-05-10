@@ -11,6 +11,7 @@ export default {
   	extend: {
   		colors: {
 			background: '#f4f3ed',
+			background_two: '#eae0d0',
   			foreground: '#F5EFE6',
   			sidebar: {
   				DEFAULT: '1A2B3C',
