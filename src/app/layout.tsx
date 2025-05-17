@@ -22,8 +22,16 @@ export default function RootLayout({
         <main className="container mx-auto p-4">
           {children}
         </main>
-        <footer className="bg-gray-900 shadow-xl text-white text-center p-4 mt-8">
-          <p>&copy; {new Date().getFullYear()} Duma Tech. Todos os direitos reservados.</p>
+        <footer className="bg-gray-900 shadow-xl text-white text-center p-4 mt-8 text-sm">
+          <p>
+            &copy; {new Date().getFullYear()} Duma Tech. Todos os direitos reservados. —{" "}
+            <a
+              href="/privacy"
+              className="underline hover:text-gradient_start transition-colors"
+            >
+              Política de Privacidade
+            </a>
+          </p>
         </footer>
       </body>
     </html>

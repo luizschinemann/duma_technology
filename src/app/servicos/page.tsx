@@ -16,7 +16,8 @@ export default function ServicosPage() {
         <p className="text-gray-700 leading-relaxed">
           Nossas implementações são seguras, escaláveis e integradas com seus sistemas existentes, como CRMs e plataformas de e-commerce. Imagine poder responder instantaneamente a milhares de clientes, realizar pesquisas de satisfação de forma automática ou gerenciar agendamentos sem intervenção humana. Com a Duma Tech, a comunicação eficiente e automatizada via WhatsApp se torna uma realidade palpável para o seu negócio, fortalecendo o relacionamento com seu público e impulsionando seus resultados.
         </p>
-        <img src="/images/telegramflow.png" width={600} className="p-10" />
+        <img src="/images/telegramflow.png" width={600} className="p-10 object-cover" />
+        <img src="/images/whatsappflow.png" width={600} className="p-10" />
       </section>
 
       <section className="p-8">

@@ -33,7 +33,7 @@ export default function TransparentHeader() {
         <nav className="container mx-center flex">
           <ul className="flex space-x-8 text-primary text-lg">
             <li><Link href="/" className="hover:text-gray-300">Home</Link></li>
-            <li><Link href="/sobre" className="hover:text-gray-300">Sobre Nós</Link></li>
+            <li><Link href="/sobre" className="hover:text-gray-300">Sobre</Link></li>
             <li><Link href="/servicos" className="hover:text-gray-300">Serviços</Link></li>            
           </ul>
         </nav>
