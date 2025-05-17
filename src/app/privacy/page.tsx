@@ -4,7 +4,7 @@ export default function PoliticaPrivacidade() {
       <h2 className="text-3xl font-semibold text-gradient_start mb-6 text-center">Política de Privacidade</h2>
 
       <p className="text-gray-700 leading-relaxed">
-        <strong>Última atualização:</strong> [inserir data]
+        <strong>Última atualização:</strong> 17/05/2025
       </p>
 
       <p className="text-gray-700 leading-relaxed">
@@ -18,7 +18,7 @@ export default function PoliticaPrivacidade() {
 
       <h3 className="text-2xl font-semibold text-gradient_start mt-6">2. Coleta e Uso de Informações</h3>
       <p className="text-gray-700 leading-relaxed">
-        Durante o uso do aplicativo, as mensagens trocadas podem conter dados informados voluntariamente por você (como nome, informações sobre seu pet ou dúvidas relacionadas a atendimento). Esses dados:
+        Durante o uso do aplicativo, as mensagens trocadas podem conter dados informados voluntariamente por você. Esses dados:
       </p>
       <ul className="list-disc pl-6 text-gray-700">
         <li>Não são armazenados permanentemente no app;</li>
@@ -36,12 +36,7 @@ export default function PoliticaPrivacidade() {
         Empregamos práticas adequadas de segurança para proteger os dados em trânsito durante a comunicação com o WhatsApp. Embora nenhuma plataforma seja completamente imune a riscos, <strong>nossos sistemas seguem padrões atualizados de proteção de dados e confidencialidade.</strong>
       </p>
 
-      <h3 className="text-2xl font-semibold text-gradient_start mt-6">5. Contato</h3>
-      <p className="text-gray-700 leading-relaxed">
-        Caso tenha dúvidas sobre esta Política de Privacidade ou queira solicitar informações adicionais, entre em contato conosco pelo WhatsApp oficial ou através do nosso canal de atendimento em [email/contato].
-      </p>
-
-      <h3 className="text-2xl font-semibold text-gradient_start mt-6">6. Alterações nesta Política</h3>
+      <h3 className="text-2xl font-semibold text-gradient_start mt-6">5. Alterações nesta Política</h3>
       <p className="text-gray-700 leading-relaxed">
         Podemos atualizar esta Política de Privacidade periodicamente. Recomendamos que você revise este documento ocasionalmente para estar ciente de eventuais mudanças.
       </p>
