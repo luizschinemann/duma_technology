@@ -1,45 +1,92 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Política de Privacidade • Duma Technology",
+  description:
+    "Entenda como a Duma trata suas informações no site e nos nossos atendimentos via WhatsApp e chat.",
+};
+
 export default function PoliticaPrivacidade() {
   return (
-    <section className="bg-gray-50 p-8 rounded-lg shadow-md space-y-6">
-      <h2 className="text-3xl font-semibold text-gradient_start mb-6 text-center">Política de Privacidade</h2>
+    <main className="mx-auto max-w-3xl px-4 sm:px-6 py-16">
+      <section className="bg-white border border-black/5 p-8 rounded-2xl shadow-sm space-y-6">
+        <h1 className="text-3xl font-semibold bg-gradient-to-r from-brand to-rust bg-clip-text text-transparent text-center">
+          Política de Privacidade
+        </h1>
 
-      <p className="text-gray-700 leading-relaxed">
-        <strong>Última atualização:</strong> 17/05/2025
-      </p>
+        <p className="text-muted leading-relaxed text-center">
+          <strong className="text-ink">Última atualização:</strong> 17/05/2025
+        </p>
 
-      <p className="text-gray-700 leading-relaxed">
-        Na Duma, respeitamos a sua privacidade e estamos comprometidos com a proteção dos seus dados pessoais. Esta Política de Privacidade descreve como coletamos, usamos e armazenamos suas informações no contexto do nosso aplicativo.
-      </p>
+        <p className="text-muted leading-relaxed">
+          Na <strong className="text-ink">Duma</strong>, respeitamos a sua privacidade e cuidamos dos seus
+          dados pessoais com responsabilidade. Esta Política explica como coletamos, usamos e protegemos
+          informações no nosso <strong className="text-ink">site</strong> e no atendimento por
+          <strong className="text-ink"> WhatsApp/chat</strong>.
+        </p>
 
-      <h3 className="text-2xl font-semibold text-gradient_start mt-6">1. Finalidade do Aplicativo</h3>
-      <p className="text-gray-700 leading-relaxed">
-        Nosso aplicativo tem como única finalidade <strong>enviar e receber mensagens via WhatsApp</strong>, com o objetivo de facilitar a comunicação entre você e nossos sistemas automatizados. <strong>Não realizamos coleta ou armazenamento de dados sensíveis</strong>, e <strong>nenhuma informação é compartilhada com terceiros</strong>.
-      </p>
+        <h2 className="text-xl sm:text-2xl font-semibold text-brand mt-6">1. Finalidade do serviço</h2>
+        <p className="text-muted leading-relaxed">
+          Nosso atendimento tem como finalidade <strong className="text-ink">enviar e receber mensagens via WhatsApp</strong>
+          e chat do site, para agilizar sua comunicação com nossos sistemas automatizados e equipe.{" "}
+          <strong className="text-ink">Não coletamos nem armazenamos dados sensíveis</strong> e{" "}
+          <strong className="text-ink">não compartilhamos informações com terceiros</strong>.
+        </p>
 
-      <h3 className="text-2xl font-semibold text-gradient_start mt-6">2. Coleta e Uso de Informações</h3>
-      <p className="text-gray-700 leading-relaxed">
-        Durante o uso do aplicativo, as mensagens trocadas podem conter dados informados voluntariamente por você. Esses dados:
-      </p>
-      <ul className="list-disc pl-6 text-gray-700">
-        <li>Não são armazenados permanentemente no app;</li>
-        <li>Não são utilizados para fins de marketing ou repasse a terceiros;</li>
-        <li>São utilizados exclusivamente para fins operacionais e de atendimento automático.</li>
-      </ul>
+        <h2 className="text-xl sm:text-2xl font-semibold text-brand mt-6">2. Coleta e uso de informações</h2>
+        <p className="text-muted leading-relaxed">
+          Durante o uso do WhatsApp/chat, as mensagens podem conter informações que você envia
+          voluntariamente. Esses dados:
+        </p>
+        <ul className="list-disc pl-6 text-muted space-y-1">
+          <li>não são armazenados permanentemente nos nossos aplicativos;</li>
+          <li>não são usados para marketing nem repassados a terceiros;</li>
+          <li>são utilizados apenas para fins operacionais e de atendimento.</li>
+        </ul>
 
-      <h3 className="text-2xl font-semibold text-gradient_start mt-6">3. Compartilhamento de Dados</h3>
-      <p className="text-gray-700 leading-relaxed">
-        <strong>Não compartilhamos, vendemos ou transferimos seus dados pessoais a terceiros.</strong> Todas as interações permanecem restritas ao ambiente da Duma e são utilizadas apenas para a execução da comunicação automatizada.
-      </p>
+        <h2 className="text-xl sm:text-2xl font-semibold text-brand mt-6">3. Compartilhamento de dados</h2>
+        <p className="text-muted leading-relaxed">
+          <strong className="text-ink">Não vendemos, compartilhamos ou transferimos</strong> seus dados pessoais
+          a terceiros. As interações ficam restritas ao ambiente da Duma e servem somente para viabilizar a
+          comunicação automatizada e o suporte.
+        </p>
 
-      <h3 className="text-2xl font-semibold text-gradient_start mt-6">4. Segurança da Informação</h3>
-      <p className="text-gray-700 leading-relaxed">
-        Empregamos práticas adequadas de segurança para proteger os dados em trânsito durante a comunicação com o WhatsApp. Embora nenhuma plataforma seja completamente imune a riscos, <strong>nossos sistemas seguem padrões atualizados de proteção de dados e confidencialidade.</strong>
-      </p>
+        <h2 className="text-xl sm:text-2xl font-semibold text-brand mt-6">4. Segurança da informação</h2>
+        <p className="text-muted leading-relaxed">
+          Adotamos práticas adequadas de segurança para proteger dados em trânsito durante a comunicação com
+          o WhatsApp e nossos serviços. Embora nenhum sistema seja 100% imune, seguimos{" "}
+          <strong className="text-ink">padrões atualizados de proteção e confidencialidade</strong>.
+        </p>
 
-      <h3 className="text-2xl font-semibold text-gradient_start mt-6">5. Alterações nesta Política</h3>
-      <p className="text-gray-700 leading-relaxed">
-        Podemos atualizar esta Política de Privacidade periodicamente. Recomendamos que você revise este documento ocasionalmente para estar ciente de eventuais mudanças.
-      </p>
-    </section>
+        <h2 className="text-xl sm:text-2xl font-semibold text-brand mt-6">5. Alterações nesta política</h2>
+        <p className="text-muted leading-relaxed">
+          Podemos atualizar este documento periodicamente. Recomendamos revisitar esta página para se manter
+          informado sobre mudanças.
+        </p>
+
+        <h2 className="text-xl sm:text-2xl font-semibold text-brand mt-6">6. Fale com a gente</h2>
+        <p className="text-muted leading-relaxed">
+          Em caso de dúvidas sobre privacidade ou tratamento de dados, fale conosco:
+        </p>
+        <ul className="text-muted">
+          <li>
+            E-mail:{" "}
+            <a href="mailto:contato@dumatechnology.com" className="underline text-brand">
+              contato@dumatechnology.com
+            </a>
+          </li>
+          <li>
+            WhatsApp:{" "}
+            <a
+              href="https://wa.me/554188503782?text=Tenho%20uma%20d%C3%BAvida%20sobre%20privacidade."
+              className="underline text-brand"
+              target="_blank"
+            >
+              +55 41 8850-3782
+            </a>
+          </li>
+        </ul>
+      </section>
+    </main>
   );
 }
