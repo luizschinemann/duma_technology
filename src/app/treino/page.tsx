@@ -24,7 +24,7 @@ const treinos = [
         nome: "Cadeira abdutora",
         series: "4",
         repeticoes: "12–15",
-        video: "https://www.youtube.com/watch?v=_ARUxqrII3Y&ab_channel=Gymleco"
+        video: "https://youtu.be/_ARUxqrII3Y?si=xV4_Y8yjOL5AVnUE"
       },
       {
         nome: "Flexora deitada/pé ou Stiff",
@@ -248,21 +248,13 @@ export default function TreinosPamela() {
         open={!!exercicioSelecionado}
         onOpenChange={() => setExercicioSelecionado(null)}
       >
-        <DialogContent className="sm:max-w-xl">
+        <DialogContent className="bg-cream" >
           <DialogHeader>
             <DialogTitle>{exercicioSelecionado?.nome}</DialogTitle>
           </DialogHeader>
           {exercicioSelecionado && (
-            <div className="aspect-video">
-              <iframe
-                width="100%"
-                height="100%"
-                src={exercicioSelecionado.video.replace("watch?v=", "embed/")}
-                title={exercicioSelecionado.nome}
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
+            <div>
+             <a href={exercicioSelecionado.video} target="_blank">{exercicioSelecionado.video}</a>
             </div>
           )}
         </DialogContent>
