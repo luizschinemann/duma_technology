@@ -288,7 +288,7 @@ export default function CardsPage() {
                                                 )}
                                             >
                                                 {/* Front */}
-                                                <Card className="absolute w-full h-full backface-hidden bg-gradient-to-br from-white to-gray-50 border-none flex items-center justify-center p-8 text-center overflow-hidden">
+                                                <Card className="absolute w-full h-full backface-hidden bg-gradient-to-br from-white to-gray-50 border-none flex items-center justify-center p-8 text-center">
                                                     {/* Decorative shapes on card */}
                                                     <div className="absolute top-0 right-0 w-24 h-24 bg-blue-50 rounded-bl-full opacity-50"></div>
                                                     <div className="absolute bottom-0 left-0 w-16 h-16 bg-blue-50 rounded-tr-full opacity-50"></div>
@@ -304,7 +304,7 @@ export default function CardsPage() {
                                                 </Card>
 
                                                 {/* Back */}
-                                                <Card className="absolute w-full h-full backface-hidden rotate-y-180 bg-gradient-to-br from-[#0054a6] to-[#003d7a] text-white border-none flex items-center justify-center p-8 text-center overflow-hidden">
+                                                <Card className="absolute w-full h-full backface-hidden rotate-y-180 bg-gradient-to-br from-[#0054a6] to-[#003d7a] text-white border-none flex items-center justify-center p-8 text-center">
                                                     {/* Decorative shapes on card */}
                                                     <div className="absolute top-0 left-0 w-32 h-32 bg-white/10 rounded-br-full"></div>
                                                     <div className="absolute bottom-0 right-0 w-24 h-24 bg-white/10 rounded-tl-full"></div>
