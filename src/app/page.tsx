@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Bot,
   MessageCircle,
@@ -11,7 +11,10 @@ import {
   LineChart,
   Link2,
   MonitorSmartphone,
+  Menu,
+  X,
 } from "lucide-react";
+import { useState } from "react";
 
 const LOGO_PATH = "/images/logo.png"; // coloque seu logo em /public/logo.png (ou .svg)
 const WHATSAPP_DISPLAY = "+55 41 8850-3782";
@@ -140,6 +143,10 @@ const projects = [
 ];
 
 export default function Page() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
+
   return (
     <div className="min-h-screen selection:bg-rust/20">
       {/* Top bar */}
@@ -150,13 +157,16 @@ export default function Page() {
               <Image src={LOGO_PATH} alt="Duma Technology" width={36} height={36} className="rounded" />
               <span className="font-semibold tracking-tight">Duma Technology</span>
             </a>
+            
+            {/* Desktop Nav */}
             <nav className="hidden md:flex items-center gap-8 text-sm text-brand">
               <a href="#servicos" className="hover:opacity-80">Serviços</a>
               <a href="#como-trabalhamos" className="hover:opacity-80">Como trabalhamos</a>
               <a href="#projetos" className="hover:opacity-80">Projetos</a>
               <a href="#contato" className="hover:opacity-80">Contato</a>
             </nav>
-            <div className="flex items-center gap-3">
+            
+            <div className="hidden md:flex items-center gap-3">
               <a
                 href={buildWa(DEFAULT_MSG, { campaign: "header_button", content: "cta_header" })}
                 className="inline-flex items-center rounded-md bg-rust text-white px-4 py-2 text-sm font-medium hover:bg-rust/90 transition"
@@ -165,8 +175,44 @@ export default function Page() {
                 Falar no WhatsApp
               </a>
             </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              className="md:hidden p-2 text-brand"
+              onClick={toggleMenu}
+              aria-label="Menu"
+            >
+              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
           </div>
         </div>
+
+        {/* Mobile Menu Overlay */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="md:hidden bg-white border-b border-black/5 overflow-hidden"
+            >
+              <nav className="flex flex-col p-4 gap-4 text-sm text-brand font-medium">
+                <a href="#servicos" onClick={toggleMenu} className="py-2 border-b border-black/5">Serviços</a>
+                <a href="#como-trabalhamos" onClick={toggleMenu} className="py-2 border-b border-black/5">Como trabalhamos</a>
+                <a href="#projetos" onClick={toggleMenu} className="py-2 border-b border-black/5">Projetos</a>
+                <a href="#contato" onClick={toggleMenu} className="py-2 border-b border-black/5">Contato</a>
+                <a
+                  href={buildWa(DEFAULT_MSG, { campaign: "header_button_mobile", content: "cta_header_mobile" })}
+                  className="inline-flex items-center justify-center rounded-md bg-rust text-white px-4 py-3 text-sm font-medium hover:bg-rust/90 transition mt-2"
+                  target="_blank"
+                  onClick={toggleMenu}
+                >
+                  Falar no WhatsApp
+                </a>
+              </nav>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
 
       {/* Hero */}
@@ -174,38 +220,38 @@ export default function Page() {
         <div className="absolute inset-0 -z-10">
           <div className="absolute left-1/2 top-[-10%] h-[600px] w-[1200px] -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,_#A54633_0%,_transparent_55%)] opacity-40" />
         </div>
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
           <div className="grid md:grid-cols-2 gap-10 items-center">
             <div>
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
-                className="text-4xl sm:text-5xl font-extrabold tracking-tight"
+                className="text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight"
               >
                 Automação e sites que{" "}
                 <span className="text-brand">economizam tempo e trazem resultado.</span>
               </motion.h1>
-              <p className="mt-5 text-muted leading-relaxed max-w-xl">
+              <p className="mt-5 text-muted leading-relaxed max-w-xl text-base sm:text-lg">
                 A gente cuida das tarefas repetitivas e do seu atendimento — e também cria sites e sistemas
                 sob medida. Você foca no que importa.
               </p>
-              <div className="mt-8 flex flex-wrap gap-3">
+              <div className="mt-8 flex flex-col sm:flex-row gap-3">
                 <a
                   href={buildWa(DEFAULT_MSG, { campaign: "hero", content: "primary_cta" })}
                   target="_blank"
-                  className="inline-flex items-center rounded-md bg-rust text-white px-5 py-3 text-sm font-medium hover:bg-rust/90 transition"
+                  className="inline-flex items-center justify-center rounded-md bg-rust text-white px-5 py-3 text-sm font-medium hover:bg-rust/90 transition w-full sm:w-auto"
                 >
-                  Chamar no WhatsApp ({WHATSAPP_DISPLAY})
+                  Chamar no WhatsApp
                 </a>
                 <a
                   href="#servicos"
-                  className="inline-flex items-center rounded-md border border-black/10 bg-white px-5 py-3 text-sm hover:bg-white/90 transition"
+                  className="inline-flex items-center justify-center rounded-md border border-black/10 bg-white px-5 py-3 text-sm hover:bg-white/90 transition w-full sm:w-auto"
                 >
                   Ver serviços
                 </a>
               </div>
-              <div className="mt-10 grid grid-cols-3 gap-4 max-w-lg">
+              <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-lg">
                 {stats.map((s, i) => (
                   <div key={i} className="rounded-lg bg-white p-4 text-center shadow-sm border border-black/5">
                     <div className="text-2xl font-semibold">{s.kpi}</div>
@@ -215,9 +261,9 @@ export default function Page() {
               </div>
             </div>
 
-            <div className="md:justify-self-end">
-              <div className="relative rounded-3xl border border-black/10 bg-white p-6 shadow-2xl">
-                <div className="rounded-2xl bg-white p-6">
+            <div className="md:justify-self-end mt-8 md:mt-0">
+              <div className="relative rounded-3xl border border-black/10 bg-white p-4 sm:p-6 shadow-2xl">
+                <div className="rounded-2xl bg-white p-4 sm:p-6">
                   <div className="flex items-center gap-2 text-sm text-brand">
                     <ShieldCheck className="h-4 w-4" /> Segurança e privacidade desde o início
                   </div>
@@ -237,7 +283,7 @@ export default function Page() {
                   </div>
                   <a
                     href={buildWa(DEFAULT_MSG, { campaign: "hero", content: "secondary_cta" })}
-                    className="mt-6 inline-flex items-center rounded-md bg-brand text-white px-5 py-3 text-sm font-medium hover:bg-brand/90 transition"
+                    className="mt-6 inline-flex w-full justify-center items-center rounded-md bg-brand text-white px-5 py-3 text-sm font-medium hover:bg-brand/90 transition"
                     target="_blank"
                   >
                     Falar com especialista no WhatsApp
@@ -265,14 +311,14 @@ export default function Page() {
       </section>
 
       {/* Serviços */}
-      <section id="servicos" className="py-20 bg-white border-t border-black/5">
+      <section id="servicos" className="py-16 sm:py-20 bg-white border-t border-black/5">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">O que fazemos</h2>
           <p className="mt-3 text-muted max-w-2xl">
             Começamos pelo que dá mais retorno rápido. Projeto leve, entrega ágil e sem complicação.
           </p>
 
-          <div className="mt-10 grid md:grid-cols-2 lg:grid-cols-5 gap-6">
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
             {features.map((f, i) => (
               <div key={i} className="rounded-2xl border border-black/10 p-6 bg-white hover:shadow-md transition">
                 <div className="flex items-center gap-2 text-sm text-brand">
@@ -298,7 +344,7 @@ export default function Page() {
                 content: "cta_sites_sistemas",
               })}
               target="_blank"
-              className="inline-flex items-center rounded-md bg-rust text-white px-5 py-3 text-sm font-medium hover:bg-rust/90 transition"
+              className="inline-flex items-center justify-center rounded-md bg-rust text-white px-5 py-3 text-sm font-medium hover:bg-rust/90 transition w-full sm:w-auto"
             >
               Quero um site ou sistema sob medida
             </a>
@@ -307,7 +353,7 @@ export default function Page() {
       </section>
 
       {/* Como trabalhamos */}
-      <section id="como-trabalhamos" className="py-20">
+      <section id="como-trabalhamos" className="py-16 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="grid lg:grid-cols-2 gap-10 items-start">
             <div>
@@ -315,7 +361,7 @@ export default function Page() {
               <p className="mt-3 text-muted max-w-xl">
                 Transparência do início ao fim. Você acompanha tudo e vê resultado rápido.
               </p>
-              <div className="mt-8 grid sm:grid-cols-2 gap-4">
+              <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {processSteps.map((s) => (
                   <div key={s.title} className="rounded-2xl border border-black/10 p-5 bg-white">
                     <div className="text-sm font-medium text-brand">{s.title}</div>
@@ -349,14 +395,14 @@ export default function Page() {
       </section>
 
       {/* Projetos (com mensagem dinâmica no WhatsApp) */}
-      <section id="projetos" className="py-20 bg-white border-t border-black/5">
+      <section id="projetos" className="py-16 sm:py-20 bg-white border-t border-black/5">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">Projetos</h2>
           <p className="mt-3 text-muted max-w-2xl">
             Clique no projeto que te interessa. Vamos te atender no WhatsApp com as informações certas para começar.
           </p>
 
-          <div className="mt-6 grid md:grid-cols-3 gap-6">
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
             {projects.map((p, i) => (
               <article
                 key={i}
@@ -389,7 +435,7 @@ export default function Page() {
       </section>
 
       {/* Contato (sem formulário) */}
-      <section id="contato" className="py-20">
+      <section id="contato" className="py-16 sm:py-20">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 text-center">
           <h2 className="text-3xl font-bold tracking-tight">Vamos conversar</h2>
           <p className="mt-3 text-muted">Fale direto com a gente pelo WhatsApp. Resposta rápida em horário comercial.</p>
@@ -397,13 +443,13 @@ export default function Page() {
             <a
               href={buildWa(DEFAULT_MSG, { campaign: "contato", content: "cta_principal" })}
               target="_blank"
-              className="inline-flex items-center justify-center rounded-md bg-rust text-white px-6 py-3 font-medium hover:bg-rust/90 transition"
+              className="inline-flex items-center justify-center rounded-md bg-rust text-white px-6 py-3 font-medium hover:bg-rust/90 transition w-full sm:w-auto"
             >
               Chamar no WhatsApp ({WHATSAPP_DISPLAY})
             </a>
             <a
               href="mailto:contato@dumatechnology.com"
-              className="inline-flex items-center justify-center rounded-md border border-black/10 bg-white px-6 py-3 font-medium hover:bg-white/90 transition"
+              className="inline-flex items-center justify-center rounded-md border border-black/10 bg-white px-6 py-3 font-medium hover:bg-white/90 transition w-full sm:w-auto"
             >
               contato@dumatechnology.com
             </a>
@@ -414,9 +460,9 @@ export default function Page() {
       {/* Footer */}
       <footer className="border-t border-black/5 py-10 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 text-sm text-muted">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
             <div>© {new Date().getFullYear()} Duma Technology. Todos os direitos reservados.</div>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center justify-center gap-4">
               <a href="/privacidade" className="hover:text-brand">
                 Política de Privacidade
               </a>
