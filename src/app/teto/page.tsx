@@ -51,7 +51,7 @@ const flashcards = [
     },
     {
         question: "Se um piloti não tiver uma superfície superior nivelada, como ele deve ser posicionado?",
-        answer: "A parte mais alta deve ser posicionada para fora, por onde passará a viga de piso."
+        answer: "A parte mais alta deve ser posicionada por onde passará a viga de piso."
     },
     {
         question: "Antes de usar a mangueira de nível, o que é crucial verificar para garantir uma medição correta?",

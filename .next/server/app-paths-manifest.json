@@ -1,6 +1,5 @@
 {
   "/treino/page": "app/treino/page.js",
   "/page": "app/page.js",
-  "/teto/page": "app/teto/page.js",
   "/_not-found/page": "app/_not-found/page.js"
 }
