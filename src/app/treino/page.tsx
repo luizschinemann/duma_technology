@@ -1,10 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { ArrowLeft, Dumbbell, Activity, Calendar } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { ArrowLeft, Dumbbell, Activity, Calendar, Save, History, LineChart } from "lucide-react";
+import { supabase } from "@/lib/supabase";
+import { toast } from "sonner";
+import {
+  LineChart as RechartsLineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer
+} from 'recharts';
 
 // --- Dados dos Treinos (Intermediário - 7 Dias) ---
 
@@ -74,12 +86,23 @@ const TREINO_DOMINGO = [ // Cardio / Recuperação Ativa
 
 type Step = "DIA" | "RESULTADO";
 
+interface ExerciseHistory {
+  date: string;
+  weight: number;
+}
+
 export default function TreinosPamela() {
   const [step, setStep] = useState<Step>("DIA");
   const [diaSelecionado, setDiaSelecionado] = useState<string>("");
   const [treinoFinal, setTreinoFinal] = useState<any[]>([]);
   const [tituloTreino, setTituloTreino] = useState<string>("");
+
+  // Estado para registro de peso
   const [exercicioSelecionado, setExercicioSelecionado] = useState<any>(null);
+  const [novoPeso, setNovoPeso] = useState<string>("");
+  const [historicoPesos, setHistoricoPesos] = useState<Record<string, number>>({}); // Mapa: exercicio -> ultimo peso
+  const [historicoCompleto, setHistoricoCompleto] = useState<ExerciseHistory[]>([]);
+  const [showHistoryModal, setShowHistoryModal] = useState(false);
 
   const diasSemana = [
     { nome: "Segunda-feira", treino: TREINO_SEGUNDA, titulo: "Inferior - Foco Quadríceps" },
@@ -90,6 +113,43 @@ export default function TreinosPamela() {
     { nome: "Sábado", treino: TREINO_SABADO, titulo: "Superior - Completo" },
     { nome: "Domingo", treino: TREINO_DOMINGO, titulo: "Cardio & Abdominais" },
   ];
+
+  // Carregar últimos pesos ao abrir um treino
+  useEffect(() => {
+    if (step === "RESULTADO" && treinoFinal.length > 0) {
+      fetchLatestWeights();
+    }
+  }, [step, treinoFinal]);
+
+  const fetchLatestWeights = async () => {
+    const exerciseNames = treinoFinal.map(e => e.nome);
+
+    // Busca o registro mais recente de cada exercícios
+    // Supabase não tem "DISTINCT ON" direto no JS simples em uma query só facilmente para mapear,
+    // então vamos buscar todo o histórico recente e filtrar no cliente ou fazer queries individuais.
+    // Para simplificar e não sobrecarregar, vamos buscar os ultimos 100 registros globais e filtrar.
+    // *Melhor*: Buscar individualmente ou usar uma RPC seria ideal, mas vamos pelo simples:
+
+    const { data, error } = await supabase
+      .from('training_history')
+      .select('exercise_name, weight, created_at')
+      .in('exercise_name', exerciseNames)
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      console.error("Erro ao buscar histórico:", error);
+      return;
+    }
+
+    const latestWeights: Record<string, number> = {};
+    // Preenche apenas com o primeiro encontrado (que é o mais recente devido ao sort)
+    data?.forEach((record) => {
+      if (!latestWeights[record.exercise_name]) {
+        latestWeights[record.exercise_name] = record.weight;
+      }
+    });
+    setHistoricoPesos(latestWeights);
+  };
 
   const handleDiaSelect = (dia: typeof diasSemana[0]) => {
     setDiaSelecionado(dia.nome);
@@ -103,6 +163,49 @@ export default function TreinosPamela() {
     setDiaSelecionado("");
     setTreinoFinal([]);
     setTituloTreino("");
+  };
+
+  const handleSaveWeight = async (exerciseName: string, weight: string) => {
+    if (!weight) return;
+
+    const pesoNum = parseFloat(weight.replace(',', '.'));
+    if (isNaN(pesoNum)) {
+      toast.error("Peso inválido");
+      return;
+    }
+
+    const { error } = await supabase
+      .from('training_history')
+      .insert([
+        { exercise_name: exerciseName, weight: pesoNum }
+      ]);
+
+    if (error) {
+      console.error("Erro ao salvar:", error);
+      toast.error("Erro ao salvar peso");
+    } else {
+      toast.success("Peso registrado!");
+      setHistoricoPesos(prev => ({ ...prev, [exerciseName]: pesoNum }));
+      setNovoPeso(""); // Limpa input se quiser, ou mantem
+    }
+  };
+
+  const openHistory = async (exerciseName: string) => {
+    const { data, error } = await supabase
+      .from('training_history')
+      .select('created_at, weight')
+      .eq('exercise_name', exerciseName)
+      .order('created_at', { ascending: true }); // Crescente para o gráfico
+
+    if (data) {
+      const formattedData = data.map(d => ({
+        date: new Date(d.created_at).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' }),
+        weight: d.weight
+      }));
+      setHistoricoCompleto(formattedData);
+      setExercicioSelecionado({ nome: exerciseName }); // Reusa estado para modal de titulo
+      setShowHistoryModal(true);
+    }
   };
 
   return (
@@ -155,31 +258,72 @@ export default function TreinosPamela() {
                 </p>
               </CardHeader>
               <CardContent className="p-6">
-                <div className="grid gap-4">
+                <div className="grid gap-6">
                   {treinoFinal.map((ex, idx) => (
                     <div
                       key={idx}
-                      className="group flex items-center justify-between p-4 rounded-lg border hover:border-blue-300 hover:bg-blue-50 transition-all cursor-pointer"
-                      onClick={() => setExercicioSelecionado(ex)}
+                      className="flex flex-col md:flex-row md:items-center justify-between p-4 rounded-lg border bg-white shadow-sm hover:shadow-md transition-all gap-4"
                     >
-                      <div className="flex items-center gap-4">
-                        <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold">
+                      {/* Info do Exercício */}
+                      <div className="flex items-start gap-4 flex-1 cursor-pointer" onClick={() => setExercicioSelecionado(ex)}>
+                        <div className="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-lg flex-shrink-0">
                           {idx + 1}
                         </div>
                         <div>
-                          <h4 className="font-bold text-gray-800 group-hover:text-blue-700">
+                          <h4 className="font-bold text-gray-800 text-lg hover:text-blue-600 transition-colors">
                             {ex.nome}
                           </h4>
                           <p className="text-sm text-gray-500">
                             {ex.series} séries x {ex.repeticoes} reps
                           </p>
+                          {historicoPesos[ex.nome] ? (
+                            <p className="text-xs text-green-600 font-semibold mt-1 flex items-center gap-1">
+                              <Activity size={12} /> Última carga: {historicoPesos[ex.nome]}kg
+                            </p>
+                          ) : (
+                            <p className="text-xs text-gray-400 mt-1 italic">Sem carga registrada</p>
+                          )}
                         </div>
                       </div>
-                      {ex.video && ex.video !== "-" && (
-                        <div className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">
-                          Ver vídeo
-                        </div>
-                      )}
+
+                      {/* Ações de Peso */}
+                      <div className="flex items-center gap-2 w-full md:w-auto">
+                        <Input
+                          placeholder="Kg"
+                          className="w-20"
+                          type="number"
+                          id={`weight-${idx}`}
+                        />
+                        <Button
+                          size="icon"
+                          variant="default"
+                          className="bg-green-600 hover:bg-green-700"
+                          onClick={() => {
+                            const input = document.getElementById(`weight-${idx}`) as HTMLInputElement;
+                            handleSaveWeight(ex.nome, input.value);
+                          }}
+                        >
+                          <Save size={18} />
+                        </Button>
+                        <Button
+                          size="icon"
+                          variant="outline"
+                          title="Ver Histórico"
+                          onClick={() => openHistory(ex.nome)}
+                        >
+                          <LineChart size={18} />
+                        </Button>
+                        {ex.video && ex.video !== "-" && (
+                          <Button
+                            size="icon"
+                            variant="ghost"
+                            className="text-blue-500 hover:text-blue-700 hover:bg-blue-50"
+                            onClick={() => setExercicioSelecionado(ex)}
+                          >
+                            <Dumbbell size={18} />
+                          </Button>
+                        )}
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -188,35 +332,63 @@ export default function TreinosPamela() {
           </div>
         )}
 
-        {/* Modal de Vídeo/Detalhes */}
-        <Dialog open={!!exercicioSelecionado} onOpenChange={() => setExercicioSelecionado(null)}>
+        {/* Modal de Detalhes (Vídeo) ou Histórico */}
+        <Dialog open={!!exercicioSelecionado} onOpenChange={(open) => {
+          if (!open) {
+            setExercicioSelecionado(null);
+            setShowHistoryModal(false);
+          }
+        }}>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
               <DialogTitle>{exercicioSelecionado?.nome}</DialogTitle>
             </DialogHeader>
-            <div className="space-y-4">
-              <div className="grid grid-cols-2 gap-4 text-center">
-                <div className="bg-gray-50 p-3 rounded-lg">
-                  <span className="block text-sm text-gray-500">Séries</span>
-                  <span className="font-bold text-xl">{exercicioSelecionado?.series}</span>
-                </div>
-                <div className="bg-gray-50 p-3 rounded-lg">
-                  <span className="block text-sm text-gray-500">Repetições</span>
-                  <span className="font-bold text-xl">{exercicioSelecionado?.repeticoes}</span>
-                </div>
-              </div>
 
-              {exercicioSelecionado?.video && exercicioSelecionado.video !== "-" && (
-                <div className="mt-4">
-                  <Button
-                    className="w-full bg-red-600 hover:bg-red-700 text-white"
-                    onClick={() => window.open(exercicioSelecionado.video, '_blank')}
-                  >
-                    Assistir Demonstração no YouTube
-                  </Button>
+            {showHistoryModal ? (
+              // EXIBIÇÃO DO HISTÓRICO
+              <div className="h-64 w-full">
+                {historicoCompleto.length > 0 ? (
+                  <ResponsiveContainer width="100%" height="100%">
+                    <RechartsLineChart data={historicoCompleto}>
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="date" />
+                      <YAxis domain={['auto', 'auto']} />
+                      <Tooltip />
+                      <Line type="monotone" dataKey="weight" stroke="#2563eb" strokeWidth={2} dot={{ r: 4 }} />
+                    </RechartsLineChart>
+                  </ResponsiveContainer>
+                ) : (
+                  <div className="flex items-center justify-center h-full text-gray-500">
+                    Nenhum histórico encontrado.
+                  </div>
+                )}
+              </div>
+            ) : (
+              // EXIBIÇÃO DE DETALHES DO EXERCÍCIO
+              <div className="space-y-4">
+                <div className="grid grid-cols-2 gap-4 text-center">
+                  <div className="bg-gray-50 p-3 rounded-lg">
+                    <span className="block text-sm text-gray-500">Séries</span>
+                    <span className="font-bold text-xl">{exercicioSelecionado?.series}</span>
+                  </div>
+                  <div className="bg-gray-50 p-3 rounded-lg">
+                    <span className="block text-sm text-gray-500">Repetições</span>
+                    <span className="font-bold text-xl">{exercicioSelecionado?.repeticoes}</span>
+                  </div>
                 </div>
-              )}
-            </div>
+
+                {exercicioSelecionado?.video && exercicioSelecionado.video !== "-" && (
+                  <div className="mt-4">
+                    <Button
+                      className="w-full bg-red-600 hover:bg-red-700 text-white"
+                      onClick={() => window.open(exercicioSelecionado.video, '_blank')}
+                    >
+                      Assistir Demonstração no YouTube
+                    </Button>
+                  </div>
+                )}
+              </div>
+            )}
           </DialogContent>
         </Dialog>
 
