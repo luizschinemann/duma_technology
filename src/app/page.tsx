@@ -1,22 +1,9 @@
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable @next/next/no-css-tags */
 "use client";
 
-import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  Bot,
-  MessageCircle,
-  ServerCog,
-  Workflow,
-  ShieldCheck,
-  LineChart,
-  Link2,
-  MonitorSmartphone,
-  Menu,
-  X,
-} from "lucide-react";
-import { useState } from "react";
+import { MessageCircle, Bot, ServerCog, Workflow, MonitorSmartphone } from "lucide-react";
 
-const LOGO_PATH = "/images/logo.png"; // coloque seu logo em /public/logo.png (ou .svg)
 const WHATSAPP_DISPLAY = "+55 41 8850-3782";
 
 /** Monta UTM dentro da própria mensagem do WhatsApp */
@@ -24,6 +11,7 @@ function withUTM(
   msg: string,
   opts: { source?: string; medium?: string; campaign?: string; content?: string } = {}
 ) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { source = "site", medium = "whatsapp", campaign = "geral", content } = opts;
   return `${msg}\n\n`;
 }
@@ -38,441 +26,403 @@ function buildWa(
 
 const DEFAULT_MSG = "Olá! Vim pelo site da Duma e gostaria de conversar.";
 
-// ====== Conteúdo ======
-
+// ====== Conteúdo ====== e
 const features = [
   {
     icon: <MessageCircle className="h-6 w-6" />,
-    title: "Atendimento no WhatsApp e chat",
+    title: "Atendimento no WhatsApp",
     desc: "Bots que respondem de imediato, organizam filas e passam para um humano quando precisa.",
     chips: ["WhatsApp e Web", "Bot + humano"],
   },
   {
     icon: <Bot className="h-6 w-6" />,
-    title: "Automação de tarefas repetitivas",
+    title: "Automação de Tarefas",
     desc: "Robôs que fazem o trabalho chato em sites e sistemas. Menos erros, mais rapidez.",
-    chips: ["Preenchimento automático", "Relatórios sem esforço"],
+    chips: ["Preenchimento automático", "Relatórios"],
   },
   {
     icon: <ServerCog className="h-6 w-6" />,
-    title: "Integração entre sistemas",
+    title: "Integração de Sistemas",
     desc: "Conectamos seu site, planilhas e softwares para que tudo trabalhe junto.",
-    chips: ["APIs e webhooks", "Confiável e seguro"],
+    chips: ["APIs e webhooks", "Confiável"],
   },
   {
     icon: <Workflow className="h-6 w-6" />,
     title: "Assistentes com IA",
     desc: "Respostas rápidas a clientes, leitura de documentos e organização de informações.",
-    chips: ["Perguntas frequentes", "Textos e documentos"],
-  },
-  {
-    icon: <MonitorSmartphone className="h-6 w-6" />,
-    title: "Desenvolvimento de sites e sistemas",
-    desc: "Sites bonitos e rápidos, e sistemas sob medida para o seu dia a dia.",
-    chips: ["Sites que vendem", "Sistemas sob medida"],
+    chips: ["Perguntas frequentes", "IA"],
   },
 ];
 
 const stats = [
   { kpi: "Até 70%", label: "menos tempo de atendimento" },
   { kpi: "+80 mil", label: "tarefas feitas por robôs/ano" },
-  { kpi: "Em 3 meses", label: "retorno típico do investimento" },
+  { kpi: "Em 3 meses", label: "retorno do investimento" },
 ];
 
-const processSteps = [
-  { title: "Entendimento", desc: "Conversamos sobre o que você precisa e onde dói mais." },
-  { title: "Plano simples", desc: "Definimos o que fazer primeiro e como medir o resultado." },
-  { title: "Primeira entrega", desc: "Algo funcionando em poucas semanas, já gerando ganho." },
-  { title: "Evolução", desc: "Aprimoramos e escalamos o que deu certo." },
-];
-
-// PROJETOS (ordem solicitada) + UTM por projeto
 const projects = [
   {
-    icon: <MonitorSmartphone className="h-5 w-5 text-brand" />,
-    title: "Desenvolvimento de site/sistema",
-    summary: "Site rápido e bonito, contato pelo WhatsApp e pronto para ranquear no Google.",
-    bullets: [
-      "Layout responsivo e visual profissional",
-      "Páginas: Home, Serviços, Sobre, Contato",
-      "Blog/CMS simples, SEO e analytics",
-      "Prazo típico: 2–4 semanas",
-    ],
-    message:
-      "Oi! Quero um projeto de Desenvolvimento de Site/Sistema com a Duma. " +
-      "Contexto: site institucional rápido e bonito, com contato via WhatsApp e blog. " +
-      "Requisitos: layout responsivo, páginas (Home, Serviços, Sobre, Contato), CMS simples, SEO e analytics. " +
-      "Prazo desejado: 2–4 semanas. Podemos conversar?",
+    title: "Site Institucional e Sistemas",
+    summary: "Layout responsivo, SEO e performance.",
+    image: "/img/blog/1.jpg",
+    message: "Oi! Quero um projeto de Desenvolvimento de Site/Sistema.",
     utm: { campaign: "projeto_desenvolvimento" },
   },
   {
-    icon: <MessageCircle className="h-5 w-5 text-brand" />,
-    title: "Automação de atendimento",
-    summary:
-      "Respostas imediatas no WhatsApp/site, triagem e encaminhamento para humano quando necessário.",
-    bullets: [
-      "Bot 24/7 com perguntas frequentes",
-      "Triagem automática e handoff para equipe",
-      "Integração com CRM / planilhas",
-      "Meta: reduzir tempo de resposta",
-    ],
-    message:
-      "Oi! Tenho interesse em Automação de Atendimento no WhatsApp. " +
-      "Objetivo: reduzir tempo de resposta, fazer triagem automática e encaminhar para humano quando precisar. " +
-      "Integração com CRM/planilhas. Indicador: reduzir TMA e ter disponibilidade 24/7. " +
-      "Podemos avaliar juntos o fluxo ideal?",
+    title: "Automação de Atendimento",
+    summary: "Bot 24/7 com inteligência e handoff humano.",
+    image: "/img/blog/2.jpg",
+    message: "Oi! Tenho interesse em Automação de Atendimento no WhatsApp.",
     utm: { campaign: "projeto_automacao_atendimento" },
-  },
-  {
-    icon: <Bot className="h-5 w-5 text-brand" />,
-    title: "Automação de fluxo (RPA)",
-    summary: "Robôs que executam tarefas repetitivas em portais e sistemas, com logs e reprocesso.",
-    bullets: [
-      "Preenchimento em portais e coleta de dados",
-      "Geração/baixa de relatórios e conciliações",
-      "Alertas, logs e reprocesso automático",
-      "Ganho: menos erros e mais velocidade",
-    ],
-    message:
-      "Oi! Preciso de Automação de Fluxo (RPA). " +
-      "Tarefas: preencher portais/sistemas, baixar relatórios e conciliar dados, com logs e reprocesso. " +
-      "Objetivo: reduzir erros e acelerar rotinas. " +
-      "Podemos começar mapeando 1 processo piloto?",
-    utm: { campaign: "projeto_rpa" },
   },
 ];
 
 export default function Page() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const toggleMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
-
   return (
-    <div className="min-h-screen selection:bg-rust/20">
-      {/* Top bar */}
-      <header className="sticky top-0 z-40 backdrop-blur bg-cream/85 border-b border-black/5">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="flex h-16 items-center justify-between">
-            <a href="#" className="flex items-center gap-2">
-              <Image src={LOGO_PATH} alt="Duma Technology" width={36} height={36} className="rounded" />
-              <span className="font-semibold tracking-tight">Duma Technology</span>
-            </a>
-            
-            {/* Desktop Nav */}
-            <nav className="hidden md:flex items-center gap-8 text-sm text-brand">
-              <a href="#servicos" className="hover:opacity-80">Serviços</a>
-              <a href="#como-trabalhamos" className="hover:opacity-80">Como trabalhamos</a>
-              <a href="#projetos" className="hover:opacity-80">Projetos</a>
-              <a href="#contato" className="hover:opacity-80">Contato</a>
-            </nav>
-            
-            <div className="hidden md:flex items-center gap-3">
-              <a
-                href={buildWa(DEFAULT_MSG, { campaign: "header_button", content: "cta_header" })}
-                className="inline-flex items-center rounded-md bg-rust text-white px-4 py-2 text-sm font-medium hover:bg-rust/90 transition"
-                target="_blank"
-              >
-                Falar no WhatsApp
-              </a>
-            </div>
+    <div className="mil-wrapper" id="top">
+      {/* cursor */}
+      <div className="mil-ball">
+        <span className="mil-icon-1">
+          <svg viewBox="0 0 128 128">
+            <path d="M106.1,41.9c-1.2-1.2-3.1-1.2-4.2,0c-1.2,1.2-1.2,3.1,0,4.2L116.8,61H11.2l14.9-14.9c1.2-1.2,1.2-3.1,0-4.2	c-1.2-1.2-3.1-1.2-4.2,0l-20,20c-1.2,1.2-1.2,3.1,0,4.2l20,20c0.6,0.6,1.4,0.9,2.1,0.9s1.5-0.3,2.1-0.9c1.2-1.2,1.2-3.1,0-4.2	L11.2,67h105.5l-14.9,14.9c-1.2,1.2-1.2,3.1,0,4.2c0.6,0.6,1.4,0.9,2.1,0.9s1.5-0.3,2.1-0.9l20-20c1.2-1.2,1.2-3.1,0-4.2L106.1,41.9	z" />
+          </svg>
+        </span>
+        <div className="mil-more-text">More</div>
+        <div className="mil-choose-text">Сhoose</div>
+      </div>
 
-            {/* Mobile Menu Button */}
-            <button
-              className="md:hidden p-2 text-brand"
-              onClick={toggleMenu}
-              aria-label="Menu"
-            >
-              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
+      {/* preloader */}
+      <div className="mil-preloader">
+        <div className="mil-preloader-animation">
+          <div className="mil-pos-abs mil-animation-1">
+            <p className="mil-h3 mil-muted mil-thin">Automação</p>
+            <p className="mil-h3 mil-muted">Software</p>
+            <p className="mil-h3 mil-muted mil-thin">Evolução</p>
+          </div>
+          <div className="mil-pos-abs mil-animation-2">
+            <div className="mil-reveal-frame">
+              <p className="mil-reveal-box"></p>
+              <p className="mil-h3 mil-muted mil-thin">duma.tech</p>
+            </div>
           </div>
         </div>
+      </div>
 
-        {/* Mobile Menu Overlay */}
-        <AnimatePresence>
-          {isMobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              className="md:hidden bg-white border-b border-black/5 overflow-hidden"
-            >
-              <nav className="flex flex-col p-4 gap-4 text-sm text-brand font-medium">
-                <a href="#servicos" onClick={toggleMenu} className="py-2 border-b border-black/5">Serviços</a>
-                <a href="#como-trabalhamos" onClick={toggleMenu} className="py-2 border-b border-black/5">Como trabalhamos</a>
-                <a href="#projetos" onClick={toggleMenu} className="py-2 border-b border-black/5">Projetos</a>
-                <a href="#contato" onClick={toggleMenu} className="py-2 border-b border-black/5">Contato</a>
-                <a
-                  href={buildWa(DEFAULT_MSG, { campaign: "header_button_mobile", content: "cta_header_mobile" })}
-                  className="inline-flex items-center justify-center rounded-md bg-rust text-white px-4 py-3 text-sm font-medium hover:bg-rust/90 transition mt-2"
-                  target="_blank"
-                  onClick={toggleMenu}
-                >
-                  Falar no WhatsApp
-                </a>
-              </nav>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </header>
+      {/* progress bar */}
+      <div className="mil-progress-track">
+        <div className="mil-progress"></div>
+      </div>
 
-      {/* Hero */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute left-1/2 top-[-10%] h-[600px] w-[1200px] -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,_#A54633_0%,_transparent_55%)] opacity-40" />
+      {/* menu */}
+      <div className="mil-menu-frame">
+        <div className="mil-frame-top">
+          <a href="/" className="mil-logo">Duma.</a>
+          <div className="mil-menu-btn">
+            <span></span>
+          </div>
         </div>
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
-          <div className="grid md:grid-cols-2 gap-10 items-center">
-            <div>
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                className="text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight"
-              >
-                Automação e sites que{" "}
-                <span className="text-brand">economizam tempo e trazem resultado.</span>
-              </motion.h1>
-              <p className="mt-5 text-muted leading-relaxed max-w-xl text-base sm:text-lg">
-                A gente cuida das tarefas repetitivas e do seu atendimento — e também cria sites e sistemas
-                sob medida. Você foca no que importa.
-              </p>
-              <div className="mt-8 flex flex-col sm:flex-row gap-3">
-                <a
-                  href={buildWa(DEFAULT_MSG, { campaign: "hero", content: "primary_cta" })}
-                  target="_blank"
-                  className="inline-flex items-center justify-center rounded-md bg-rust text-white px-5 py-3 text-sm font-medium hover:bg-rust/90 transition w-full sm:w-auto"
-                >
-                  Chamar no WhatsApp
-                </a>
-                <a
-                  href="#servicos"
-                  className="inline-flex items-center justify-center rounded-md border border-black/10 bg-white px-5 py-3 text-sm hover:bg-white/90 transition w-full sm:w-auto"
-                >
-                  Ver serviços
-                </a>
-              </div>
-              <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-lg">
-                {stats.map((s, i) => (
-                  <div key={i} className="rounded-lg bg-white p-4 text-center shadow-sm border border-black/5">
-                    <div className="text-2xl font-semibold">{s.kpi}</div>
-                    <div className="mt-1 text-xs text-muted">{s.label}</div>
+        <div className="mil-menu">
+          <div className="container">
+            <div className="mil-menu-content">
+              <div className="row">
+                <div className="col-xl-5">
+                  <nav className="mil-main-menu" id="swupMenu">
+                    <ul>
+                      <li className="mil-active"><a href="#top">Início</a></li>
+                      <li><a href="#servicos">Serviços</a></li>
+                      <li><a href="#sobre">Sobre</a></li>
+                      <li><a href="#projetos">Projetos</a></li>
+                      <li><a href="#contato">Contato</a></li>
+                    </ul>
+                  </nav>
+                </div>
+                <div className="col-xl-7">
+                  <div className="mil-menu-right-frame">
+                    <div className="mil-animation-in">
+                      <div className="mil-animation-frame">
+                        <div className="mil-animation mil-position-1 mil-scale" data-value-1="2" data-value-2="2"></div>
+                      </div>
+                    </div>
+                    <div className="mil-menu-right">
+                      <h6 className="mil-muted mil-mb-30">Vamos conversar?</h6>
+                      <p className="mil-light-soft mil-up mil-mb-30">Especialistas em automação de processos e desenvolvimento de software sob medida.</p>
+                      <a href={buildWa(DEFAULT_MSG, { campaign: "menu" })} className="mil-button mil-arrow-place mil-mb-60" target="_blank">
+                        <span>WhatsApp {WHATSAPP_DISPLAY}</span>
+                      </a>
+                    </div>
                   </div>
-                ))}
+                </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
 
-            <div className="md:justify-self-end mt-8 md:mt-0">
-              <div className="relative rounded-3xl border border-black/10 bg-white p-4 sm:p-6 shadow-2xl">
-                <div className="rounded-2xl bg-white p-4 sm:p-6">
-                  <div className="flex items-center gap-2 text-sm text-brand">
-                    <ShieldCheck className="h-4 w-4" /> Segurança e privacidade desde o início
+      {/* curtain */}
+      <div className="mil-curtain"></div>
+
+      {/* frame */}
+      <div className="mil-frame">
+        <div className="mil-frame-top">
+          <a href="/" className="mil-logo">Duma.</a>
+          <div className="mil-menu-btn">
+            <span></span>
+          </div>
+        </div>
+        <div className="mil-frame-bottom">
+          <div className="mil-current-page"></div>
+          <div className="mil-back-to-top">
+            <a href="#top" className="mil-link mil-dark mil-arrow-place">
+              <span>Voltar ao topo</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* content */}
+      <div className="mil-content">
+        <div id="swupMain" className="mil-main-transition">
+          {/* banner */}
+          <section className="mil-banner mil-dark-bg">
+            <div className="mi-invert-fix">
+              <div className="mil-animation-frame">
+                <div className="mil-animation mil-position-1 mil-scale" data-value-1="7" data-value-2="1.6"></div>
+                <div className="mil-animation mil-position-2 mil-scale" data-value-1="4" data-value-2="1"></div>
+                <div className="mil-animation mil-position-3 mil-scale" data-value-1="1.2" data-value-2=".1"></div>
+              </div>
+              <div className="mil-gradient"></div>
+              <div className="container">
+                <div className="mil-banner-content mil-up">
+                  <h1 className="mil-muted mil-mb-60">Automação <span className="mil-thin">e sites que</span><br /> trazem <span className="mil-thin">resultado</span></h1>
+                  <div className="row">
+                    <div className="col-md-7 col-lg-5">
+                      <p className="mil-light-soft mil-mb-60">Cuidamos das tarefas repetitivas e do seu atendimento — e também criamos sistemas sob medida para você focar no que importa.</p>
+                    </div>
                   </div>
-                  <div className="mt-4 grid gap-3 text-sm">
-                    <div className="flex items-center gap-2">
-                      <MessageCircle className="h-4 w-4 text-brand" /> Resposta imediata no WhatsApp e no site
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Bot className="h-4 w-4 text-brand" /> Robôs que não param e evitam retrabalho
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <ServerCog className="h-4 w-4 text-brand" /> Sistemas conversando entre si
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <LineChart className="h-4 w-4 text-brand" /> Acompanhamento com números claros
-                    </div>
-                  </div>
-                  <a
-                    href={buildWa(DEFAULT_MSG, { campaign: "hero", content: "secondary_cta" })}
-                    className="mt-6 inline-flex w-full justify-center items-center rounded-md bg-brand text-white px-5 py-3 text-sm font-medium hover:bg-brand/90 transition"
-                    target="_blank"
-                  >
-                    Falar com especialista no WhatsApp
+                  <a href={buildWa(DEFAULT_MSG, { campaign: "hero" })} target="_blank" className="mil-button mil-arrow-place mil-btn-space">
+                    <span>Chamar no WhatsApp</span>
                   </a>
+                  <a href="#servicos" className="mil-link mil-muted mil-arrow-place">
+                    <span>Ver serviços</span>
+                  </a>
+                  <div className="mil-circle-text">
+                    <svg viewBox="0 0 300 300" className="mil-ct-svg mil-rotate" data-value="360">
+                      <defs>
+                        <path id="circlePath" d="M 150, 150 m -60, 0 a 60,60 0 0,1 120,0 a 60,60 0 0,1 -120,0 " />
+                      </defs>
+                      <circle cx="150" cy="100" r="75" fill="none" />
+                      <g>
+                        <use xlinkHref="#circlePath" fill="none" />
+                        <text style={{ letterSpacing: '6.5px' }}>
+                          <textPath xlinkHref="#circlePath">Role para baixo - Role para baixo - </textPath>
+                        </text>
+                      </g>
+                    </svg>
+                    <a href="#servicos" className="mil-button mil-arrow-place mil-icon-button mil-arrow-down"></a>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
+          </section>
 
-      {/* Tecnologias (texto simples) */}
-      <section aria-label="Ferramentas que usamos" className="py-10">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="flex flex-wrap items-center justify-center gap-3 opacity-80 text-xs">
-            {["WhatsApp", "Chat no site", "Sites rápidos", "Integrações", "Automação", "Painéis e métricas"].map(
-              (l) => (
-                <div key={l} className="rounded-md border border-black/10 bg-white px-3 py-2 text-muted">
-                  {l}
-                </div>
-              )
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* Serviços */}
-      <section id="servicos" className="py-16 sm:py-20 bg-white border-t border-black/5">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">O que fazemos</h2>
-          <p className="mt-3 text-muted max-w-2xl">
-            Começamos pelo que dá mais retorno rápido. Projeto leve, entrega ágil e sem complicação.
-          </p>
-
-          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-            {features.map((f, i) => (
-              <div key={i} className="rounded-2xl border border-black/10 p-6 bg-white hover:shadow-md transition">
-                <div className="flex items-center gap-2 text-sm text-brand">
-                  <div className="rounded-lg bg-brand/10 p-2 text-brand">{f.icon}</div>
-                  <span className="font-medium">{f.title}</span>
-                </div>
-                <p className="mt-3 text-sm text-muted leading-relaxed">{f.desc}</p>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {f.chips.map((c) => (
-                    <span key={c} className="rounded-lg border border-black/10 px-2 py-1 text-xs text-muted bg-white">
-                      {c}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-10 flex flex-wrap gap-3">
-            <a
-              href={buildWa("Quero um site ou sistema sob medida.", {
-                campaign: "servicos",
-                content: "cta_sites_sistemas",
-              })}
-              target="_blank"
-              className="inline-flex items-center justify-center rounded-md bg-rust text-white px-5 py-3 text-sm font-medium hover:bg-rust/90 transition w-full sm:w-auto"
-            >
-              Quero um site ou sistema sob medida
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Como trabalhamos */}
-      <section id="como-trabalhamos" className="py-16 sm:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="grid lg:grid-cols-2 gap-10 items-start">
-            <div>
-              <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">Como trabalhamos</h2>
-              <p className="mt-3 text-muted max-w-xl">
-                Transparência do início ao fim. Você acompanha tudo e vê resultado rápido.
-              </p>
-              <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {processSteps.map((s) => (
-                  <div key={s.title} className="rounded-2xl border border-black/10 p-5 bg-white">
-                    <div className="text-sm font-medium text-brand">{s.title}</div>
-                    <div className="mt-1 text-sm text-muted">{s.desc}</div>
+          {/* stats simplified */}
+          <section className="mil-p-120-0">
+            <div className="container">
+              <div className="row justify-content-between">
+                {stats.map((s, i) => (
+                  <div key={i} className="col-lg-3 mil-mb-60">
+                    <div className="mil-up mil-center">
+                      <h2 className="mil-mb-15">{s.kpi}</h2>
+                      <p className="mil-upper mil-mb-30">{s.label}</p>
+                    </div>
                   </div>
                 ))}
               </div>
-              <div className="mt-6 flex items-center gap-2 text-sm text-brand">
-                <Link2 className="h-4 w-4" /> Integramos com o que você já usa
-              </div>
             </div>
-            <div className="rounded-3xl border border-black/10 bg-white p-6">
-              <h3 className="text-lg font-medium">Formas de contratação</h3>
-              <ul className="mt-4 space-y-3 text-sm text-muted">
-                <li>
-                  <span className="font-medium text-ink">Começo Rápido:</span> primeira versão em poucas semanas.
-                </li>
-                <li>
-                  <span className="font-medium text-ink">Plano Mensal:</span> melhorias contínuas e suporte.
-                </li>
-                <li>
-                  <span className="font-medium text-ink">Projeto Fechado:</span> escopo definido e prazo combinado.
-                </li>
-              </ul>
-              <div className="mt-6 rounded-xl border border-black/10 p-4 text-xs text-muted bg-white">
-                Sempre com documentação, versão dos códigos e acompanhamento por métricas.
+          </section>
+
+          {/* services */}
+          <section id="servicos" className="mil-dark-bg">
+            <div className="mi-invert-fix">
+              <div className="mil-animation-frame">
+                <div className="mil-animation mil-position-1 mil-scale" data-value-1="2.4" data-value-2="1.4" style={{ top: '300px', right: '-100px' }}></div>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Projetos (com mensagem dinâmica no WhatsApp) */}
-      <section id="projetos" className="py-16 sm:py-20 bg-white border-t border-black/5">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">Projetos</h2>
-          <p className="mt-3 text-muted max-w-2xl">
-            Clique no projeto que te interessa. Vamos te atender no WhatsApp com as informações certas para começar.
-          </p>
-
-          <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-            {projects.map((p, i) => (
-              <article
-                key={i}
-                className="rounded-2xl border border-black/10 p-6 bg-white hover:shadow-md transition"
-              >
-                <div className="flex items-center gap-2">
-                  <div className="rounded-md bg-brand/10 p-2">{p.icon}</div>
-                  <div className="text-sm font-medium text-brand">{p.title}</div>
+              <div className="container mil-p-120-0">
+                <div className="mil-mb-120">
+                  <div className="row">
+                    <div className="col-lg-10">
+                      <span className="mil-suptitle mil-light-soft mil-suptitle-right mil-up">Focados em ajudar sua marca<br /> a crescer e evoluir através da tecnologia.</span>
+                    </div>
+                  </div>
+                  <div className="mil-complex-text justify-content-center mil-up mil-mb-15">
+                    <h2 className="mil-h1 mil-muted mil-center">Nossos <span className="mil-thin">Serviços</span></h2>
+                  </div>
                 </div>
-
-                <p className="mt-3 text-sm text-ink font-medium">{p.summary}</p>
-
-                <ul className="mt-3 text-sm text-muted list-disc list-inside space-y-1">
-                  {p.bullets.map((b) => (
-                    <li key={b}>{b}</li>
+                <div className="row mil-services-grid m-0">
+                  {features.map((f, i) => (
+                    <div key={i} className="col-md-6 col-lg-3 mil-services-grid-item p-0">
+                      <a href={buildWa(`Olá! Gostaria de saber mais sobre ${f.title}`, { campaign: "servicos" })} target="_blank" className="mil-service-card-sm mil-up">
+                        <h5 className="mil-muted mil-mb-30">{f.title}</h5>
+                        <p className="mil-light-soft mil-mb-30">{f.desc}</p>
+                        <div className="mil-button mil-icon-button-sm mil-arrow-place"></div>
+                      </a>
+                    </div>
                   ))}
-                </ul>
-
-                <a
-                  href={buildWa(p.message, { campaign: p.utm.campaign, content: "card_cta" })}
-                  target="_blank"
-                  className="mt-4 inline-block text-sm text-rust underline underline-offset-4"
-                >
-                  Falar sobre este projeto no WhatsApp
-                </a>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Contato (sem formulário) */}
-      <section id="contato" className="py-16 sm:py-20">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 text-center">
-          <h2 className="text-3xl font-bold tracking-tight">Vamos conversar</h2>
-          <p className="mt-3 text-muted">Fale direto com a gente pelo WhatsApp. Resposta rápida em horário comercial.</p>
-          <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
-            <a
-              href={buildWa(DEFAULT_MSG, { campaign: "contato", content: "cta_principal" })}
-              target="_blank"
-              className="inline-flex items-center justify-center rounded-md bg-rust text-white px-6 py-3 font-medium hover:bg-rust/90 transition w-full sm:w-auto"
-            >
-              Chamar no WhatsApp ({WHATSAPP_DISPLAY})
-            </a>
-            <a
-              href="mailto:contato@dumatechnology.com"
-              className="inline-flex items-center justify-center rounded-md border border-black/10 bg-white px-6 py-3 font-medium hover:bg-white/90 transition w-full sm:w-auto"
-            >
-              contato@dumatechnology.com
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="border-t border-black/5 py-10 bg-white">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 text-sm text-muted">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-            <div>© {new Date().getFullYear()} Duma Technology. Todos os direitos reservados.</div>
-            <div className="flex items-center justify-center gap-4">
-              <a href="/privacidade" className="hover:text-brand">
-                Política de Privacidade
-              </a>
-              <a href="#" className="hover:text-brand">
-                Termos
-              </a>
+                </div>
+              </div>
             </div>
+          </section>
+
+          {/* about / process */}
+          <section id="sobre">
+            <div className="container mil-p-120-30">
+              <div className="row justify-content-between align-items-center">
+                <div className="col-lg-6 col-xl-5">
+                  <div className="mil-mb-90">
+                    <h2 className="mil-up mil-mb-60">Como <br />Trabalhamos <span className="mil-thin">Duma</span></h2>
+                    <p className="mil-up mil-mb-30">Começamos pelo que dá mais retorno rápido. Projeto leve, entrega ágil e sem complicação. Transparência do início ao fim, você acompanha tudo e vê resultado real.</p>
+                    <p className="mil-up mil-mb-60">Sempre com documentação, versão dos códigos e acompanhamento por métricas claras para o seu negócio.</p>
+                    <div className="mil-about-quote">
+                      <h6 className="mil-quote mil-up">Tecnologia de ponta <span className="mil-thin">transformada em</span> resultados <span className="mil-thin">tangíveis para sua empresa.</span></h6>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-lg-5">
+                  <div className="mil-about-photo mil-mb-90">
+                    <div className="mil-lines-place"></div>
+                    <div className="mil-up mil-img-frame" style={{ paddingBottom: '160%' }}>
+                      <img src="/img/photo/image.png" alt="Work" className="mil-scale" data-value-1="1" data-value-2="1.2" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* projects / case studies */}
+          <section id="projetos">
+            <div className="container mil-p-120-60">
+              <div className="row align-items-center mil-mb-30">
+                <div className="col-lg-6 mil-mb-30">
+                  <h3 className="mil-up">Projetos que são especialidades:</h3>
+                </div>
+              </div>
+              <div className="row">
+                {projects.map((p, i) => (
+                  <div key={i} className="col-lg-6">
+                    <a href={buildWa(p.message, { campaign: p.utm.campaign })} target="_blank" className="mil-blog-card mil-mb-60">
+                      <div className="mil-post-descr">
+                        <div className="mil-labels mil-up mil-mb-30">
+                          <div className="mil-label mil-upper mil-accent">PROJETO</div>
+                        </div>
+                        <h4 className="mil-up mil-mb-30">{p.title}</h4>
+                        <p className="mil-post-text mil-up mil-mb-30">{p.summary}</p>
+                        <div className="mil-link mil-dark mil-arrow-place mil-up">
+                          <span>Conversar sobre este projeto</span>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* contact */}
+          <section id="contato" className="mil-soft-bg">
+            <div className="container mil-p-120-120">
+              <div className="row justify-content-center">
+                <div className="col-lg-10">
+                  <h2 className="mil-center mil-up mil-mb-60">Vamos transformar <span className="mil-thin">seu negócio</span> através da <span className="mil-thin">tecnologia?</span></h2>
+                  <div className="mil-center mil-up">
+                    <a href={buildWa(DEFAULT_MSG, { campaign: "contato" })} target="_blank" className="mil-button mil-arrow-place mil-btn-space">
+                      <span>Falar no WhatsApp</span>
+                    </a>
+                    <a href="mailto:contato@dumatechnology.com" className="mil-link mil-dark mil-arrow-place">
+                      <span>Enviar Email</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* footer */}
+          <footer className="mil-dark-bg">
+            <div className="mi-invert-fix">
+              <div className="container mil-p-120-60">
+                <div className="row justify-content-between">
+                  <div className="col-md-4 col-lg-4 mil-mb-60">
+                    <div className="mil-muted mil-logo mil-up mil-mb-30">Duma Tech.</div>
+                    <p className="mil-light-soft mil-up mil-mb-30">Especialistas em automação e desenvolvimento de software.</p>
+                  </div>
+                  <div className="col-md-7 col-lg-6">
+                    <div className="row justify-content-end">
+                      <div className="col-md-6 col-lg-7">
+                        <nav className="mil-footer-menu mil-mb-60">
+                          <ul>
+                            <li className="mil-up"><a href="#top">Home</a></li>
+                            <li className="mil-up"><a href="#servicos">Serviços</a></li>
+                            <li className="mil-up"><a href="#sobre">Sobre</a></li>
+                            <li className="mil-up"><a href="#projetos">Projetos</a></li>
+                            <li className="mil-up"><a href="#contato">Contato</a></li>
+                          </ul>
+                        </nav>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="row justify-content-between flex-sm-row-reverse">
+                  <div className="col-md-7 col-lg-6">
+                    <div className="row justify-content-between">
+                      <div className="col-md-6 col-lg-5 mil-mb-60">
+                        <h6 className="mil-muted mil-up mil-mb-30">Brasil</h6>
+                        <p className="mil-light-soft mil-up">Curitiba - PR <br /> <span className="mil-no-wrap">{WHATSAPP_DISPLAY}</span></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-md-4 col-lg-6 mil-mb-60">
+                    <div className="mil-vert-between">
+                      <p className="mil-light-soft mil-up">© {new Date().getFullYear()} Duma Technology. Todos os direitos reservados.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </footer>
+
+          {/* hidden elements for GSAP cloning */}
+          <div className="mil-hidden-elements">
+            <div className="mil-dodecahedron">
+              <div className="mil-pentagon"><div></div><div></div><div></div><div></div><div></div></div>
+              <div className="mil-pentagon"><div></div><div></div><div></div><div></div><div></div></div>
+              <div className="mil-pentagon"><div></div><div></div><div></div><div></div><div></div></div>
+              <div className="mil-pentagon"><div></div><div></div><div></div><div></div><div></div></div>
+              <div className="mil-pentagon"><div></div><div></div><div></div><div></div><div></div></div>
+              <div className="mil-pentagon"><div></div><div></div><div></div><div></div><div></div></div>
+              <div className="mil-pentagon"><div></div><div></div><div></div><div></div><div></div></div>
+              <div className="mil-pentagon"><div></div><div></div><div></div><div></div><div></div></div>
+              <div className="mil-pentagon"><div></div><div></div><div></div><div></div><div></div></div>
+              <div className="mil-pentagon"><div></div><div></div><div></div><div></div><div></div></div>
+              <div className="mil-pentagon"><div></div><div></div><div></div><div></div><div></div></div>
+              <div className="mil-pentagon"><div></div><div></div><div></div><div></div><div></div></div>
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="mil-arrow">
+              <path d="M 14 5.3417969 C 13.744125 5.3417969 13.487969 5.4412187 13.292969 5.6367188 L 13.207031 5.7226562 C 12.816031 6.1136563 12.816031 6.7467188 13.207031 7.1367188 L 17.070312 11 L 4 11 C 3.448 11 3 11.448 3 12 C 3 12.552 3.448 13 4 13 L 17.070312 13 L 13.207031 16.863281 C 12.816031 17.254281 12.816031 17.887344 13.207031 18.277344 L 13.292969 18.363281 C 13.683969 18.754281 14.317031 18.754281 14.707031 18.363281 L 20.363281 12.707031 C 20.754281 12.316031 20.754281 11.682969 20.363281 11.292969 L 14.707031 5.6367188 C 14.511531 5.4412187 14.255875 5.3417969 14 5.3417969 z" />
+            </svg>
+            <svg width="250" viewBox="0 0 300 1404" fill="none" xmlns="http://www.w3.org/2000/svg" className="mil-lines">
+              <path fillRule="evenodd" clipRule="evenodd" d="M1 892L1 941H299V892C299 809.71 232.29 743 150 743C67.7096 743 1 809.71 1 892ZM0 942H300V892C300 809.157 232.843 742 150 742C67.1573 742 0 809.157 0 892L0 942Z" className="mil-move" />
+              <path fillRule="evenodd" clipRule="evenodd" d="M299 146V97L1 97V146C1 228.29 67.7096 295 150 295C232.29 295 299 228.29 299 146ZM300 96L0 96V146C0 228.843 67.1573 296 150 296C232.843 296 300 228.843 300 146V96Z" className="mil-move" />
+              <path fillRule="evenodd" clipRule="evenodd" d="M299 1H1V1403H299V1ZM0 0V1404H300V0H0Z" />
+              <path fillRule="evenodd" clipRule="evenodd" d="M150 -4.37115e-08L150 1404L149 1404L149 0L150 -4.37115e-08Z" />
+              <path fillRule="evenodd" clipRule="evenodd" d="M150 1324C232.29 1324 299 1257.29 299 1175C299 1092.71 232.29 1026 150 1026C67.7096 1026 1 1092.71 1 1175C1 1257.29 67.7096 1324 150 1324ZM150 1325C232.843 1325 300 1257.84 300 1175C300 1092.16 232.843 1025 150 1025C67.1573 1025 0 1092.16 0 1175C0 1257.84 67.1573 1325 150 1325Z" className="mil-move" />
+              <path fillRule="evenodd" clipRule="evenodd" d="M300 1175H0V1174H300V1175Z" className="mil-move" />
+              <path fillRule="evenodd" clipRule="evenodd" d="M150 678C232.29 678 299 611.29 299 529C299 446.71 232.29 380 150 380C67.7096 380 1 446.71 1 529C1 611.29 67.7096 678 150 678ZM150 679C232.843 679 300 611.843 300 529C300 446.157 232.843 379 150 379C67.1573 379 0 446.157 0 529C0 611.843 67.1573 679 150 679Z" className="mil-move" />
+              <path fillRule="evenodd" clipRule="evenodd" d="M299 380H1V678H299V380ZM0 379V679H300V379H0Z" className="mil-move" />
+            </svg>
           </div>
         </div>
-      </footer>
+      </div>
     </div>
   );
 }

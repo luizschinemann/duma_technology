@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -21,7 +22,27 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR">
-      <body className="bg-cream text-ink antialiased">{children}</body>
+      <head>
+        <link rel="stylesheet" href="/css/plugins/bootstrap-grid.css" />
+        <link rel="stylesheet" href="/css/plugins/font-awesome.min.css" />
+        <link rel="stylesheet" href="/css/plugins/swiper.min.css" />
+        <link rel="stylesheet" href="/css/plugins/fancybox.min.css" />
+        <link rel="stylesheet" href="/css/style.css" />
+      </head>
+      <body className="antialiased">
+        {children}
+
+        {/* Scripts */}
+        <Script src="/js/plugins/jquery.min.js" strategy="afterInteractive" />
+        <Script src="/js/plugins/swup.min.js" strategy="afterInteractive" />
+        <Script src="/js/plugins/swiper.min.js" strategy="afterInteractive" />
+        <Script src="/js/plugins/fancybox.min.js" strategy="afterInteractive" />
+        <Script src="/js/plugins/gsap.min.js" strategy="afterInteractive" />
+        <Script src="/js/plugins/smooth-scroll.js" strategy="afterInteractive" />
+        <Script src="/js/plugins/ScrollTrigger.min.js" strategy="afterInteractive" />
+        <Script src="/js/plugins/ScrollTo.min.js" strategy="afterInteractive" />
+        <Script src="/js/main.js" strategy="afterInteractive" />
+      </body>
     </html>
   );
 }
