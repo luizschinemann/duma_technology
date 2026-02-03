@@ -1,7 +1,6 @@
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/request'
+import { NextResponse, NextRequest } from 'next/server'
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
     const url = request.nextUrl
     const hostname = request.headers.get('host')
 
@@ -16,6 +15,8 @@ export function middleware(request: NextRequest) {
 
     return NextResponse.next()
 }
+
+export default proxy
 
 // Config to match all paths except for static files and api
 export const config = {
