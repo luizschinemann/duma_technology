@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <base href="/tm/">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+    <meta charset="UTF-8">
+    <title>Processo de Trabalho · TM Creative Lab</title>
+    <meta name="description" content="Saiba como trabalhamos na TM Creative Lab." />
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Round">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="white" style="padding: 0; margin: 0; background: #fff !important;">
+
+    <canvas id="bg-canvas" style="width: 100%; height: 100vh; position: fixed; z-index: -1"></canvas>
+
+    <div id="nav-index" class="nav-mobile-main hide-on-med-and-down z-depth-0"
+        style="position: fixed; top: 24px; user-select: none; width: 100%; z-index: 1000;">
+        <nav class="bw-text z-depth-0 transparent" role="navigation">
+            <div class="nav-wrapper container flex-nav animate__animated"
+                style="backdrop-filter: blur(12px); border-radius: 8px; padding: 0 24px; background: rgba(118, 0, 0, 0.8); border: 1px solid rgba(213, 92, 121, 0.2)">
+                <a href="index.html" class="brand-logo" style="display: flex;">
+                    <div class="tm-logo-circle">
+                        <img src="assets/logo.jpg" alt="TM Creative Lab Logo">
+                    </div>
+                </a>
+                <ul class="hide-on-med-and-down font-futura" style="line-height: 64px; margin-left: auto;">
+                    <li><a class="white-text" href="index.html">Home</a></li>
+                    <li><a class="white-text" href="sobre-tm.html">Sobre</a></li>
+                    <li><a class="white-text" href="servicos.html">Serviços</a></li>
+                    <li><a class="white-text" href="processo.html">Processo</a></li>
+                    <li><a class="white-text" href="impacto-social.html">Impacto</a></li>
+                    <li><a class="white-text" href="contato.html">Contato</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <main>
+        <!-- Process Hero (Asymmetric Design) -->
+        <div class="rs-split-bg-pink" style="padding: 160px 0 60px; overflow: hidden;">
+            <div class="container" style="position: relative;">
+                <div class="rs-deco-watermark" style="top: 15%; left: -8%; opacity: 0.04;">TM</div>
+                <h1 class="font-heading"
+                    style="font-weight: 800; font-size: 5rem; margin: 0; color: var(--accent-dark); position: relative; z-index: 2; line-height: 1;">
+                    Nosso <br><span style="color: #fff; -webkit-text-stroke: 1px var(--accent-dark);">Processo</span>
+                </h1>
+                <p
+                    style="font-size: 1.4rem; max-width: 600px; margin-top: 30px; color: var(--accent-dark); position: relative; z-index: 2; font-weight: 500;">
+                    A metodologia cativa que transforma essência em impacto digital.
+                </p>
+            </div>
+        </div>
+
+        <!-- Main Process Flow (High Contrast Dark) -->
+        <div class="bg-dark-accent" style="padding: 100px 0;">
+            <div class="container">
+                <div class="process-wrapper">
+                    <!-- Step 1 -->
+                    <div class="row flex-valign" style="margin-bottom: 80px;">
+                        <div class="col s12 m5 center">
+                            <div class="backdrop-blur"
+                                style="border-radius: 50%; width: 220px; height: 220px; line-height: 220px; margin: 0 auto; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.02)">
+                                <i class="material-icons-round"
+                                    style="font-size: 5rem; vertical-align: middle; color: #fff;">forum</i>
+                            </div>
+                        </div>
+                        <div class="col s12 m2 center">
+                            <div class="process-node pulse"
+                                style="width: 60px; height: 60px; line-height: 54px; font-size: 1.5rem; background: var(--accent-pink); color: #fff;">
+                                1</div>
+                        </div>
+                        <div class="col s12 m5">
+                            <h3 class="font-heading" style="font-weight: 800; font-size: 2rem; color: #fff;">Reunião de
+                                Escuta</h3>
+                            <p class="white-text" style="font-size: 1.1rem; opacity: 0.8;">O primeiro passo é te ouvir.
+                                Queremos entender sua história, seus desafios e seus objetivos para o futuro.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="row flex-valign" style="margin-bottom: 80px;">
+                        <div class="col s12 m5 push-m7 center">
+                            <div class="backdrop-blur"
+                                style="border-radius: 50%; width: 220px; height: 220px; line-height: 220px; margin: 0 auto; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.02)">
+                                <i class="material-icons-round"
+                                    style="font-size: 5rem; vertical-align: middle; color: #fff;">search</i>
+                            </div>
+                        </div>
+                        <div class="col s12 m2 center">
+                            <div class="process-node pulse"
+                                style="width: 60px; height: 60px; line-height: 54px; font-size: 1.5rem; background: var(--accent-pink); color: #fff;">
+                                2</div>
+                        </div>
+                        <div class="col s12 m5 pull-m7 right-align">
+                            <h3 class="font-heading" style="font-weight: 800; font-size: 2rem; color: #fff;">
+                                Entendimento da Marca</h3>
+                            <p class="white-text" style="font-size: 1.1rem; opacity: 0.8;">Mergulhamos na essência do
+                                seu negócio para identificar o que te torna único e como traduzir isso em comunicação.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="row flex-valign" style="margin-bottom: 80px;">
+                        <div class="col s12 m5 center">
+                            <div class="backdrop-blur"
+                                style="border-radius: 50%; width: 220px; height: 220px; line-height: 220px; margin: 0 auto; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.02)">
+                                <i class="material-icons-round"
+                                    style="font-size: 5rem; vertical-align: middle; color: #fff;">receipt_long</i>
+                            </div>
+                        </div>
+                        <div class="col s12 m2 center">
+                            <div class="process-node pulse"
+                                style="width: 60px; height: 60px; line-height: 54px; font-size: 1.5rem; background: var(--accent-pink); color: #fff;">
+                                3</div>
+                        </div>
+                        <div class="col s12 m5">
+                            <h3 class="font-heading" style="font-weight: 800; font-size: 2rem; color: #fff;">Orçamento
+                                Personalizado</h3>
+                            <p class="white-text" style="font-size: 1.1rem; opacity: 0.8;">Apresentamos uma proposta que
+                                faz sentido para o seu momento e para os objetivos que traçamos juntos.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="row flex-valign">
+                        <div class="col s12 m5 push-m7 center">
+                            <div class="backdrop-blur"
+                                style="border-radius: 50%; width: 220px; height: 220px; line-height: 220px; margin: 0 auto; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.02)">
+                                <i class="material-icons-round"
+                                    style="font-size: 5rem; vertical-align: middle; color: #fff;">auto_fix_high</i>
+                            </div>
+                        </div>
+                        <div class="col s12 m2 center">
+                            <div class="process-node pulse"
+                                style="width: 60px; height: 60px; line-height: 54px; font-size: 1.5rem; background: var(--accent-pink); color: #fff;">
+                                4</div>
+                        </div>
+                        <div class="col s12 m5 pull-m7 right-align">
+                            <h3 class="font-heading" style="font-weight: 800; font-size: 2rem; color: #fff;">Execução
+                                Estratégica</h3>
+                            <p class="white-text" style="font-size: 1.1rem; opacity: 0.8;">Implementamos a estratégia,
+                                criamos o design e acompanhamos cada resultado de perto.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ Link (Clean White breathing space) -->
+        <div class="bg-white center" style="padding: 100px 0;">
+            <div class="container">
+                <h3 class="font-heading" style="font-weight: 800; color: var(--accent-dark);">Dúvidas sobre o processo?
+                </h3>
+                <p style="font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 40px;">Confira nossas
+                    perguntas frequentes ou entre em contato.</p>
+                <a href="index.html#faq" class="btn-large outline-pink"
+                    style="border: 1px solid var(--accent-dark); color: var(--accent-dark);">VER FAQ</a>
+                <a href="contato.html" class="btn-large pink"
+                    style="background-color: var(--accent-pink) !important; color: #fff; margin-left: 10px;">VAMOS
+                    CONVERSAR?</a>
+            </div>
+        </div>
+
+        <!-- Final Finish (High Contrast Dark Red) -->
+        <div class="bg-dark-accent center" style="padding: 100px 0;">
+            <div class="container">
+                <h3 class="font-heading" style="font-weight: 800; color: #fff;">Pronto para começar?</h3>
+                <p style="font-size: 1.2rem; color: rgba(255,255,255,0.7); margin-bottom: 40px;">Sua jornada para uma
+                    marca com alma começa aqui.</p>
+                <a href="contato.html" class="btn-large white black-text font-futura"
+                    style="border-radius: 100px; padding: 0 50px;">QUERO UMA REUNIÃO</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="white black-text center py-8" style="border-top: 1px solid rgba(118, 0, 0, 0.1);">
+        <div class="container">
+            <div class="tm-logo-circle" style="margin: 0 auto 20px; opacity: 0.8; background-color: transparent;">
+                <img src="assets/logo.jpg" alt="TM Creative Lab Logo">
+            </div>
+            <h1 class="font-heading"
+                style="font-weight: 800; opacity: 0.05; font-size: 5rem; margin: 0; color: var(--accent-dark);">
+                TM
+                CREATIVE LAB</h1>
+            <div class="mt-4 text-secondary">
+                <p>Copyright 2026 © by TM Creative Lab. Estratégia com alma.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="scripts.js"></script>
+</body>
+
+</html>

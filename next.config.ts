@@ -9,6 +9,18 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: '.',
   },
+  async rewrites() {
+    return [
+      {
+        source: '/tm',
+        destination: '/tm/index.html',
+      },
+      {
+        source: '/tm/',
+        destination: '/tm/index.html',
+      },
+    ]
+  },
 }
 
 export default nextConfig

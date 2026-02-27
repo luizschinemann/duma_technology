@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <base href="/tm/">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+    <meta charset="UTF-8">
+    <title>Contato · TM Creative Lab</title>
+    <meta name="description" content="Entre em contato com a TM Creative Lab e transforme sua marca." />
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Round">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="white" style="padding: 0; margin: 0; background: #fff !important;">
+
+    <canvas id="bg-canvas" style="width: 100%; height: 100vh; position: fixed; z-index: -1"></canvas>
+
+    <div id="nav-index" class="nav-mobile-main hide-on-med-and-down z-depth-0"
+        style="position: fixed; top: 24px; user-select: none; width: 100%; z-index: 1000;">
+        <nav class="bw-text z-depth-0 transparent" role="navigation">
+            <div class="nav-wrapper container flex-nav animate__animated"
+                style="backdrop-filter: blur(12px); border-radius: 8px; padding: 0 24px; background: rgba(118, 0, 0, 0.8); border: 1px solid rgba(213, 92, 121, 0.2)">
+                <a href="index.html" class="brand-logo" style="display: flex;">
+                    <div class="tm-logo-circle">
+                        <img src="assets/logo.jpg" alt="TM Creative Lab Logo">
+                    </div>
+                </a>
+                <ul class="hide-on-med-and-down font-futura" style="line-height: 64px; margin-left: auto;">
+                    <li><a class="white-text" href="index.html">Home</a></li>
+                    <li><a class="white-text" href="sobre-tm.html">Sobre</a></li>
+                    <li><a class="white-text" href="servicos.html">Serviços</a></li>
+                    <li><a class="white-text" href="processo.html">Processo</a></li>
+                    <li><a class="white-text" href="impacto-social.html">Impacto</a></li>
+                    <li><a class="white-text" href="contato.html">Contato</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <main>
+        <!-- Contact Hero (Soft Gradient) -->
+        <div class="section-wash-primary" style="padding: 120px 0 60px;">
+            <div class="container">
+                <h1 class="font-heading" style="font-weight: 800; font-size: 4rem; margin: 0;">Vamos conversar</h1>
+                <p style="font-size: 1.2rem; max-width: 600px; margin-top: 20px; color: var(--accent-dark);">Escolha a
+                    melhor forma de falar com a gente.</p>
+            </div>
+        </div>
+
+        <!-- Contact Options (Clean White breathing space) -->
+        <div class="bg-white" style="padding: 100px 0;">
+            <div class="container">
+                <div class="row">
+                    <!-- WhatsApp CTA (Main) -->
+                    <div class="col s12 m5">
+                        <div class="card-panel white z-depth-1 backdrop-blur-strong border-black center"
+                            style="border-radius: 30px; padding: 60px; height: 500px; display: flex; flex-direction: column; justify-content: center; border: 1px solid rgba(0,0,0,0.1)">
+                            <i class="material-icons-round" style="font-size: 5rem; color: #128C7E;">whatsapp</i>
+                            <h4 class="font-heading" style="font-weight: 800; color: #000;">WhatsApp</h4>
+                            <p class="grey-text text-darken-1">Resposta rápida para suas dúvidas e agendamento de
+                                reuniões.
+                            </p>
+                            <div style="margin-top: 30px;">
+                                <!-- TODO: Replace with your WhatsApp number (format: country code + number, no spaces)
+                                     Example for Brazil: https://wa.me/5511999999999
+                                     See CONFIG.md for details -->
+                                <a href="https://wa.me/5511999999999" target="_blank"
+                                    class="btn-large green darken-2 font-futura"
+                                    style="border-radius: 100px; padding: 0 40px;">FALAR AGORA</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col s12 m6 offset-m1">
+                        <div class="card-panel white z-depth-1 backdrop-blur border-black"
+                            style="border-radius: 30px; padding: 40px; height: 500px; border: 1px solid rgba(0,0,0,0.1)">
+                            <h5 class="font-heading" style="font-weight: 800; margin-top: 0; color: #000;">Ou envie um
+                                formulário</h5>
+                            <!-- TODO: Configure form handler. Options: FormSpree, Netlify Forms, or custom backend
+                                 See CONFIG.md for setup instructions -->
+                            <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" style="margin-top: 30px;">
+                                <div class="input-field">
+                                    <input type="text" id="name" class="black-text">
+                                    <label for="name">Nome completo</label>
+                                </div>
+                                <div class="input-field">
+                                    <input type="text" id="brand" class="black-text">
+                                    <label for="brand">Sua marca/empresa</label>
+                                </div>
+                                <div class="input-field">
+                                    <textarea id="objective" class="materialize-textarea black-text"></textarea>
+                                    <label for="objective">Qual seu objetivo?</label>
+                                </div>
+                                <div class="input-field">
+                                    <input type="text" id="contact" class="black-text">
+                                    <label for="contact">E-mail ou Telefone</label>
+                                </div>
+                                <div class="center" style="margin-top: 20px;">
+                                    <button class="btn-large btn-pill pink" style="width: 100%;">ENVIAR
+                                        MENSAGEM</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Visual Finish (Gradient Hero) -->
+        <div class="section-gradient-hero" style="padding: 60px 0;">
+            <div class="container center">
+                <p style="color: rgba(255,255,255,0.7); font-size: 1.1rem; margin: 0;">Estamos ansiosos para conhecer
+                    sua história.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="white black-text center py-8" style="border-top: 1px solid rgba(118, 0, 0, 0.1);">
+        <div class="container">
+            <div class="tm-logo-circle" style="margin: 0 auto 20px; opacity: 0.8; background-color: transparent;">
+                <img src="assets/logo.jpg" alt="TM Creative Lab Logo">
+            </div>
+            <h1 class="font-heading"
+                style="font-weight: 800; opacity: 0.05; font-size: 5rem; margin: 0; color: var(--accent-dark);">
+                TM
+                CREATIVE LAB</h1>
+            <div class="mt-4 text-secondary">
+                <p>Copyright 2026 © by TM Creative Lab. Estratégia com alma.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="scripts.js"></script>
+</body>
+
+</html>
