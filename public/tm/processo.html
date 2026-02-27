@@ -22,7 +22,7 @@
 
     <canvas id="bg-canvas" style="width: 100%; height: 100vh; position: fixed; z-index: -1"></canvas>
 
-    <div id="nav-index" class="nav-mobile-main hide-on-med-and-down z-depth-0"
+    <div id="nav-index" class="nav-mobile-main z-depth-0"
         style="position: fixed; top: 24px; user-select: none; width: 100%; z-index: 1000;">
         <nav class="bw-text z-depth-0 transparent" role="navigation">
             <div class="nav-wrapper container flex-nav animate__animated"
@@ -32,6 +32,13 @@
                         <img src="assets/logo.jpg" alt="TM Creative Lab Logo">
                     </div>
                 </a>
+
+                <!-- Hamburger for Mobile -->
+                <a href="#" data-target="mobile-nav" class="sidenav-trigger right white-text"
+                    style="margin-left: auto; display: none;">
+                    <i class="material-icons">menu</i>
+                </a>
+
                 <ul class="hide-on-med-and-down font-futura" style="line-height: 64px; margin-left: auto;">
                     <li><a class="white-text" href="index.html">Home</a></li>
                     <li><a class="white-text" href="sobre-tm.html">Sobre</a></li>
@@ -43,6 +50,24 @@
             </div>
         </nav>
     </div>
+
+    <!-- Mobile Sidenav Structure -->
+    <ul class="sidenav font-futura" id="mobile-nav"
+        style="background: rgba(118, 0, 0, 0.95); padding-top: 40px; border-left: 1px solid rgba(213, 92, 121, 0.2);">
+        <li style="margin-bottom: 30px;">
+            <div class="center">
+                <div class="tm-logo-circle" style="margin: 0 auto; width: 80px; height: 80px;">
+                    <img src="assets/logo.jpg" alt="TM Creative Lab Logo">
+                </div>
+            </div>
+        </li>
+        <li><a class="white-text" href="index.html">Home</a></li>
+        <li><a class="white-text" href="sobre-tm.html">Sobre</a></li>
+        <li><a class="white-text" href="servicos.html">Serviços</a></li>
+        <li><a class="white-text" href="processo.html">Processo</a></li>
+        <li><a class="white-text" href="impacto-social.html">Impacto</a></li>
+        <li><a class="white-text" href="contato.html">Contato</a></li>
+    </ul>
 
     <main>
         <!-- Process Hero (Asymmetric Design) -->
