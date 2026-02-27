@@ -17,7 +17,9 @@ $(document).ready(function () {
     }
 
     // 2. Materialize Initialization
-    $('.sidenav').sidenav();
+    $('.sidenav').sidenav({
+        edge: 'right'
+    });
     $('.collapsible').collapsible();
     $('.tooltipped').tooltip();
 
