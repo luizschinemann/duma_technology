@@ -2,6 +2,7 @@
 /* eslint-disable @next/next/no-css-tags */
 "use client";
 
+import { useEffect, useState } from "react";
 import { MessageCircle, Bot, ServerCog, Workflow, MonitorSmartphone } from "lucide-react";
 
 const WHATSAPP_DISPLAY = "+55 41 8850-3782";
@@ -52,6 +53,18 @@ const features = [
     desc: "Respostas rápidas a clientes, leitura de documentos e organização de informações.",
     chips: ["Perguntas frequentes", "IA"],
   },
+  {
+    icon: <MonitorSmartphone className="h-6 w-6" />,
+    title: "Desenvolvimento de Sites",
+    desc: "Sites institucionais, landing pages e sistemas web com foco em performance e conversão.",
+    chips: ["Responsivo", "SEO"],
+  },
+  {
+    icon: <ServerCog className="h-6 w-6" />,
+    title: "Plugins para Navegador",
+    desc: "Extensões personalizadas para Chrome e Edge que automatizam tarefas direto no browser.",
+    chips: ["Chrome / Edge", "Automação web"],
+  },
 ];
 
 const stats = [
@@ -78,6 +91,20 @@ const projects = [
 ];
 
 export default function Page() {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (window.innerWidth <= 768) {
+        setScrolled(false);
+        return;
+      }
+      setScrolled(window.scrollY > 60);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <div className="mil-wrapper" id="top">
       {/* cursor */}
@@ -116,7 +143,9 @@ export default function Page() {
       {/* menu */}
       <div className="mil-menu-frame">
         <div className="mil-frame-top">
-          <a href="/" className="mil-logo">Duma.</a>
+          <a href="/" className="mil-logo">
+            <img src="/logo.png" alt="Duma." className={`mil-logo-img${scrolled ? " hidden" : ""}`} style={{ height: '60px', width: 'auto' }} />
+          </a>
           <div className="mil-menu-btn">
             <span></span>
           </div>
@@ -164,7 +193,9 @@ export default function Page() {
       {/* frame */}
       <div className="mil-frame">
         <div className="mil-frame-top">
-          <a href="/" className="mil-logo">Duma.</a>
+          <a href="/" className="mil-logo">
+            <img src="/logo.png" alt="Duma." className={`mil-logo-img${scrolled ? " hidden" : ""}`} style={{ height: '60px', width: 'auto' }} />
+          </a>
           <div className="mil-menu-btn">
             <span></span>
           </div>
@@ -228,11 +259,16 @@ export default function Page() {
           {/* stats simplified */}
           <section className="mil-p-120-0">
             <div className="container">
+              <div className="mil-up mil-center mil-mb-60">
+                <p className="mil-upper" style={{ fontSize: '11px', letterSpacing: '1.5px', opacity: 0.5 }}>
+                  * Valores estimados — resultados variam conforme a realidade e o escopo de cada projeto.
+                </p>
+              </div>
               <div className="row justify-content-between">
                 {stats.map((s, i) => (
                   <div key={i} className="col-lg-3 mil-mb-60">
                     <div className="mil-up mil-center">
-                      <h2 className="mil-mb-15">{s.kpi}</h2>
+                      <h2 className="mil-mb-15">{s.kpi}*</h2>
                       <p className="mil-upper mil-mb-30">{s.label}</p>
                     </div>
                   </div>
@@ -260,7 +296,7 @@ export default function Page() {
                 </div>
                 <div className="row mil-services-grid m-0">
                   {features.map((f, i) => (
-                    <div key={i} className="col-md-6 col-lg-3 mil-services-grid-item p-0">
+                    <div key={i} className="col-6 col-md-4 col-lg-2 mil-services-grid-item p-0">
                       <a href={buildWa(`Olá! Gostaria de saber mais sobre ${f.title}`, { campaign: "servicos" })} target="_blank" className="mil-service-card-sm mil-up">
                         <h5 className="mil-muted mil-mb-30">{f.title}</h5>
                         <p className="mil-light-soft mil-mb-30">{f.desc}</p>
@@ -353,7 +389,9 @@ export default function Page() {
               <div className="container mil-p-120-60">
                 <div className="row justify-content-between">
                   <div className="col-md-4 col-lg-4 mil-mb-60">
-                    <div className="mil-muted mil-logo mil-up mil-mb-30">Duma Tech.</div>
+                    <div className="mil-logo mil-up mil-mb-30">
+                      <img src="/logo.png" alt="Duma." style={{ height: '50px', width: 'auto' }} />
+                    </div>
                     <p className="mil-light-soft mil-up mil-mb-30">Especialistas em automação e desenvolvimento de software.</p>
                   </div>
                   <div className="col-md-7 col-lg-6">

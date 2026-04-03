@@ -34,3 +34,49 @@
 .rotate-y-180 {
     transform: rotateY(180deg);
 }
+
+/* === Fix: mantém cores originais do logo (evita invert das dark sections) === */
+.mil-frame {
+    z-index: 1000 !important;
+}
+
+/* === Logo: fade ao scrollar === */
+.mil-logo-img {
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    opacity: 1;
+    transform: translateY(0);
+}
+.mil-logo-img.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-8px);
+}
+
+/* === Layout: container de conteúdo limitado a 1280px === */
+.container {
+    max-width: 1280px !important;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* === Serviços: 6 colunas — reduz padding para caber inline === */
+@media screen and (min-width: 992px) {
+    .mil-service-card-sm {
+        padding: 40px 20px !important;
+    }
+}
+
+/* === Mobile: reduz elementos como logo em telas pequenas === */
+@media screen and (max-width: 768px) {
+    .mil-logo img {
+        height: 40px !important;
+    }
+
+    .mil-frame-top {
+        padding: 0 16px;
+    }
+
+    .mil-banner-content h1 {
+        font-size: 2rem !important;
+    }
+}
