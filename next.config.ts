@@ -1,7 +1,6 @@
 import { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  /* config options here */
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -9,17 +8,11 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: '.',
   },
-  async rewrites() {
-    return [
-      {
-        source: '/tm',
-        destination: '/tm/index.html',
-      },
-      {
-        source: '/tm/',
-        destination: '/tm/index.html',
-      },
-    ]
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    imageSizes: [32, 64, 128, 256, 384],
+    minimumCacheTTL: 86400,
   },
 }
 
