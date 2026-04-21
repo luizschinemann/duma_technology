@@ -14,18 +14,6 @@ const nextConfig: NextConfig = {
     imageSizes: [32, 64, 128, 256, 384],
     minimumCacheTTL: 86400,
   },
-  async rewrites() {
-    return [
-      {
-        source: '/tm',
-        destination: '/tm/index.html',
-      },
-      {
-        source: '/tm/',
-        destination: '/tm/index.html',
-      },
-    ]
-  },
 }
 
 export default nextConfig
