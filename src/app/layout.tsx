@@ -39,7 +39,6 @@ export const metadata: Metadata = {
       "Automação de processos e atendimento (RPA, WhatsApp, integrações AWS) e desenvolvimento de software.",
     images: ["/og-image.png"],
   },
-  icons: { icon: "/favicon.ico" },
 };
 
 const jsonLd = {

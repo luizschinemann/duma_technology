@@ -145,7 +145,7 @@ export default function Page() {
       <div className="mil-menu-frame">
         <div className="mil-frame-top">
           <a href="/" className="mil-logo">
-            <Image src="/logo.png" alt="Duma." width={150} height={60} className={`mil-logo-img${scrolled ? " hidden" : ""}`} style={{ height: '60px', width: 'auto' }} priority />
+            <Image src="/logo.png" alt="Duma Technology" title="Duma Technology — Página inicial" width={150} height={60} sizes="150px" className={`mil-logo-img${scrolled ? " hidden" : ""}`} style={{ height: '60px', width: 'auto' }} priority />
           </a>
           <div className="mil-menu-btn" role="button" aria-label="Abrir menu" tabIndex={0}>
             <span></span>
@@ -195,7 +195,7 @@ export default function Page() {
       <header className="mil-frame" aria-label="Cabeçalho do site">
         <div className="mil-frame-top">
           <a href="/" className="mil-logo">
-            <Image src="/logo.png" alt="Duma." width={150} height={60} className={`mil-logo-img${scrolled ? " hidden" : ""}`} style={{ height: '60px', width: 'auto' }} priority />
+            <Image src="/logo.png" alt="Duma Technology" title="Duma Technology — Página inicial" width={150} height={60} sizes="150px" className={`mil-logo-img${scrolled ? " hidden" : ""}`} style={{ height: '60px', width: 'auto' }} priority />
           </a>
           <div className="mil-menu-btn" role="button" aria-label="Abrir menu" tabIndex={0}>
             <span></span>
@@ -245,7 +245,7 @@ export default function Page() {
                       <circle cx="150" cy="100" r="75" fill="none" />
                       <g>
                         <use xlinkHref="#circlePath" fill="none" />
-                        <text style={{ letterSpacing: '6.5px' }}>
+                        <text style={{ letterSpacing: '3.5px' }}>
                           <textPath xlinkHref="#circlePath">Role para baixo - Role para baixo - </textPath>
                         </text>
                       </g>
@@ -328,7 +328,7 @@ export default function Page() {
                   <div className="mil-about-photo mil-mb-90">
                     <div className="mil-lines-place"></div>
                     <div className="mil-up mil-img-frame" style={{ paddingBottom: '160%' }}>
-                      <Image src="/img/photo/image.png" alt="Equipe Duma Technology trabalhando" fill className="mil-scale" style={{ objectFit: 'cover' }} data-value-1="1" data-value-2="1.2" />
+                      <Image src="/img/photo/image.png" alt="Equipe Duma Technology trabalhando em projetos de automação e software" title="Como a Duma Technology trabalha" fill sizes="(max-width: 992px) 100vw, 41vw" className="mil-scale" style={{ objectFit: 'cover' }} data-value-1="1" data-value-2="1.2" />
                     </div>
                   </div>
                 </div>
@@ -391,7 +391,7 @@ export default function Page() {
                 <div className="row justify-content-between">
                   <div className="col-md-4 col-lg-4 mil-mb-60">
                     <div className="mil-logo mil-up mil-mb-30">
-                      <Image src="/logo.png" alt="Duma." width={125} height={50} style={{ height: '50px', width: 'auto' }} />
+                      <Image src="/logo.png" alt="Duma Technology" width={125} height={50} sizes="125px" style={{ height: '50px', width: 'auto' }} />
                     </div>
                     <p className="mil-light-soft mil-up mil-mb-30">Especialistas em automação e desenvolvimento de software.</p>
                   </div>
