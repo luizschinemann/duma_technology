@@ -2,6 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+/* skip link — visível apenas no foco por teclado */
+.mil-skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 9999;
+  padding: 0.5rem 1rem;
+  background: #000;
+  color: #fff;
+  font-size: 0.875rem;
+  border-radius: 0 0 4px 4px;
+  text-decoration: none;
+  transition: top 0.2s;
+}
+.mil-skip-link:focus {
+  top: 0;
+}
+
 /* efeito hover sutil */
 .lift {
     transition: transform .2s ease, box-shadow .2s ease;

@@ -1,8 +1,7 @@
-/* eslint-disable @next/next/no-img-element */
-/* eslint-disable @next/next/no-css-tags */
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { MessageCircle, Bot, ServerCog, Workflow, MonitorSmartphone } from "lucide-react";
 
 const WHATSAPP_DISPLAY = "+55 41 8850-3782";
@@ -107,10 +106,12 @@ export default function Page() {
 
   return (
     <div className="mil-wrapper" id="top">
+      {/* skip link */}
+      <a href="#conteudo-principal" className="mil-skip-link">Pular para o conteúdo</a>
       {/* cursor */}
       <div className="mil-ball">
-        <span className="mil-icon-1">
-          <svg viewBox="0 0 128 128">
+        <span className="mil-icon-1" aria-hidden="true">
+          <svg viewBox="0 0 128 128" aria-hidden="true">
             <path d="M106.1,41.9c-1.2-1.2-3.1-1.2-4.2,0c-1.2,1.2-1.2,3.1,0,4.2L116.8,61H11.2l14.9-14.9c1.2-1.2,1.2-3.1,0-4.2	c-1.2-1.2-3.1-1.2-4.2,0l-20,20c-1.2,1.2-1.2,3.1,0,4.2l20,20c0.6,0.6,1.4,0.9,2.1,0.9s1.5-0.3,2.1-0.9c1.2-1.2,1.2-3.1,0-4.2	L11.2,67h105.5l-14.9,14.9c-1.2,1.2-1.2,3.1,0,4.2c0.6,0.6,1.4,0.9,2.1,0.9s1.5-0.3,2.1-0.9l20-20c1.2-1.2,1.2-3.1,0-4.2L106.1,41.9	z" />
           </svg>
         </span>
@@ -144,9 +145,9 @@ export default function Page() {
       <div className="mil-menu-frame">
         <div className="mil-frame-top">
           <a href="/" className="mil-logo">
-            <img src="/logo.png" alt="Duma." className={`mil-logo-img${scrolled ? " hidden" : ""}`} style={{ height: '60px', width: 'auto' }} />
+            <Image src="/logo.png" alt="Duma." width={150} height={60} className={`mil-logo-img${scrolled ? " hidden" : ""}`} style={{ height: '60px', width: 'auto' }} priority />
           </a>
-          <div className="mil-menu-btn">
+          <div className="mil-menu-btn" role="button" aria-label="Abrir menu" tabIndex={0}>
             <span></span>
           </div>
         </div>
@@ -173,9 +174,9 @@ export default function Page() {
                       </div>
                     </div>
                     <div className="mil-menu-right">
-                      <h6 className="mil-muted mil-mb-30">Vamos conversar?</h6>
+                      <p className="mil-h6 mil-muted mil-mb-30">Vamos conversar?</p>
                       <p className="mil-light-soft mil-up mil-mb-30">Especialistas em automação de processos e desenvolvimento de software sob medida.</p>
-                      <a href={buildWa(DEFAULT_MSG, { campaign: "menu" })} className="mil-button mil-arrow-place mil-mb-60" target="_blank">
+                      <a href={buildWa(DEFAULT_MSG, { campaign: "menu" })} className="mil-button mil-arrow-place mil-mb-60" target="_blank" rel="noopener noreferrer">
                         <span>WhatsApp {WHATSAPP_DISPLAY}</span>
                       </a>
                     </div>
@@ -191,12 +192,12 @@ export default function Page() {
       <div className="mil-curtain"></div>
 
       {/* frame */}
-      <div className="mil-frame">
+      <header className="mil-frame" aria-label="Cabeçalho do site">
         <div className="mil-frame-top">
           <a href="/" className="mil-logo">
-            <img src="/logo.png" alt="Duma." className={`mil-logo-img${scrolled ? " hidden" : ""}`} style={{ height: '60px', width: 'auto' }} />
+            <Image src="/logo.png" alt="Duma." width={150} height={60} className={`mil-logo-img${scrolled ? " hidden" : ""}`} style={{ height: '60px', width: 'auto' }} priority />
           </a>
-          <div className="mil-menu-btn">
+          <div className="mil-menu-btn" role="button" aria-label="Abrir menu" tabIndex={0}>
             <span></span>
           </div>
         </div>
@@ -208,10 +209,10 @@ export default function Page() {
             </a>
           </div>
         </div>
-      </div>
+      </header>
 
       {/* content */}
-      <div className="mil-content">
+      <main id="conteudo-principal" className="mil-content">
         <div id="swupMain" className="mil-main-transition">
           {/* banner */}
           <section className="mil-banner mil-dark-bg">
@@ -230,14 +231,14 @@ export default function Page() {
                       <p className="mil-light-soft mil-mb-60">Cuidamos das tarefas repetitivas e do seu atendimento — e também criamos sistemas sob medida para você focar no que importa.</p>
                     </div>
                   </div>
-                  <a href={buildWa(DEFAULT_MSG, { campaign: "hero" })} target="_blank" className="mil-button mil-arrow-place mil-btn-space">
+                  <a href={buildWa(DEFAULT_MSG, { campaign: "hero" })} target="_blank" rel="noopener noreferrer" className="mil-button mil-arrow-place mil-btn-space">
                     <span>Chamar no WhatsApp</span>
                   </a>
                   <a href="#servicos" className="mil-link mil-muted mil-arrow-place">
                     <span>Ver serviços</span>
                   </a>
                   <div className="mil-circle-text">
-                    <svg viewBox="0 0 300 300" className="mil-ct-svg mil-rotate" data-value="360">
+                    <svg viewBox="0 0 300 300" className="mil-ct-svg mil-rotate" data-value="360" aria-hidden="true">
                       <defs>
                         <path id="circlePath" d="M 150, 150 m -60, 0 a 60,60 0 0,1 120,0 a 60,60 0 0,1 -120,0 " />
                       </defs>
@@ -268,7 +269,7 @@ export default function Page() {
                 {stats.map((s, i) => (
                   <div key={i} className="col-lg-3 mil-mb-60">
                     <div className="mil-up mil-center">
-                      <h2 className="mil-mb-15">{s.kpi}*</h2>
+                      <p className="mil-h2 mil-mb-15">{s.kpi}*</p>
                       <p className="mil-upper mil-mb-30">{s.label}</p>
                     </div>
                   </div>
@@ -297,8 +298,8 @@ export default function Page() {
                 <div className="row mil-services-grid m-0">
                   {features.map((f, i) => (
                     <div key={i} className="col-6 col-md-4 col-lg-2 mil-services-grid-item p-0">
-                      <a href={buildWa(`Olá! Gostaria de saber mais sobre ${f.title}`, { campaign: "servicos" })} target="_blank" className="mil-service-card-sm mil-up">
-                        <h5 className="mil-muted mil-mb-30">{f.title}</h5>
+                      <a href={buildWa(`Olá! Gostaria de saber mais sobre ${f.title}`, { campaign: "servicos" })} target="_blank" rel="noopener noreferrer" className="mil-service-card-sm mil-up">
+                        <h3 className="mil-h5 mil-muted mil-mb-30">{f.title}</h3>
                         <p className="mil-light-soft mil-mb-30">{f.desc}</p>
                         <div className="mil-button mil-icon-button-sm mil-arrow-place"></div>
                       </a>
@@ -319,7 +320,7 @@ export default function Page() {
                     <p className="mil-up mil-mb-30">Começamos pelo que dá mais retorno rápido. Projeto leve, entrega ágil e sem complicação. Transparência do início ao fim, você acompanha tudo e vê resultado real.</p>
                     <p className="mil-up mil-mb-60">Sempre com documentação, versão dos códigos e acompanhamento por métricas claras para o seu negócio.</p>
                     <div className="mil-about-quote">
-                      <h6 className="mil-quote mil-up">Tecnologia de ponta <span className="mil-thin">transformada em</span> resultados <span className="mil-thin">tangíveis para sua empresa.</span></h6>
+                      <p className="mil-h6 mil-quote mil-up">Tecnologia de ponta <span className="mil-thin">transformada em</span> resultados <span className="mil-thin">tangíveis para sua empresa.</span></p>
                     </div>
                   </div>
                 </div>
@@ -327,7 +328,7 @@ export default function Page() {
                   <div className="mil-about-photo mil-mb-90">
                     <div className="mil-lines-place"></div>
                     <div className="mil-up mil-img-frame" style={{ paddingBottom: '160%' }}>
-                      <img src="/img/photo/image.png" alt="Work" className="mil-scale" data-value-1="1" data-value-2="1.2" />
+                      <Image src="/img/photo/image.png" alt="Equipe Duma Technology trabalhando" fill className="mil-scale" style={{ objectFit: 'cover' }} data-value-1="1" data-value-2="1.2" />
                     </div>
                   </div>
                 </div>
@@ -346,7 +347,7 @@ export default function Page() {
               <div className="row">
                 {projects.map((p, i) => (
                   <div key={i} className="col-lg-6">
-                    <a href={buildWa(p.message, { campaign: p.utm.campaign })} target="_blank" className="mil-blog-card mil-mb-60">
+                    <a href={buildWa(p.message, { campaign: p.utm.campaign })} target="_blank" rel="noopener noreferrer" className="mil-blog-card mil-mb-60">
                       <div className="mil-post-descr">
                         <div className="mil-labels mil-up mil-mb-30">
                           <div className="mil-label mil-upper mil-accent">PROJETO</div>
@@ -371,7 +372,7 @@ export default function Page() {
                 <div className="col-lg-10">
                   <h2 className="mil-center mil-up mil-mb-60">Vamos transformar <span className="mil-thin">seu negócio</span> através da <span className="mil-thin">tecnologia?</span></h2>
                   <div className="mil-center mil-up">
-                    <a href={buildWa(DEFAULT_MSG, { campaign: "contato" })} target="_blank" className="mil-button mil-arrow-place mil-btn-space">
+                    <a href={buildWa(DEFAULT_MSG, { campaign: "contato" })} target="_blank" rel="noopener noreferrer" className="mil-button mil-arrow-place mil-btn-space">
                       <span>Falar no WhatsApp</span>
                     </a>
                     <a href="mailto:contato@dumatechnology.com" className="mil-link mil-dark mil-arrow-place">
@@ -390,7 +391,7 @@ export default function Page() {
                 <div className="row justify-content-between">
                   <div className="col-md-4 col-lg-4 mil-mb-60">
                     <div className="mil-logo mil-up mil-mb-30">
-                      <img src="/logo.png" alt="Duma." style={{ height: '50px', width: 'auto' }} />
+                      <Image src="/logo.png" alt="Duma." width={125} height={50} style={{ height: '50px', width: 'auto' }} />
                     </div>
                     <p className="mil-light-soft mil-up mil-mb-30">Especialistas em automação e desenvolvimento de software.</p>
                   </div>
@@ -414,7 +415,7 @@ export default function Page() {
                   <div className="col-md-7 col-lg-6">
                     <div className="row justify-content-between">
                       <div className="col-md-6 col-lg-5 mil-mb-60">
-                        <h6 className="mil-muted mil-up mil-mb-30">Brasil</h6>
+                        <p className="mil-muted mil-up mil-mb-30"><strong>Brasil</strong></p>
                         <p className="mil-light-soft mil-up">Curitiba - PR <br /> <span className="mil-no-wrap">{WHATSAPP_DISPLAY}</span></p>
                       </div>
                     </div>
@@ -460,7 +461,7 @@ export default function Page() {
             </svg>
           </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 }
