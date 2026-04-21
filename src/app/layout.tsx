@@ -81,6 +81,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="antialiased">
         {children}
 
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-J4D6L1PN68"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-J4D6L1PN68');
+          `}
+        </Script>
+
         {/* Scripts */}
         <Script src="/js/plugins/jquery.min.js" strategy="afterInteractive" />
         <Script src="/js/plugins/swup.min.js" strategy="afterInteractive" />
