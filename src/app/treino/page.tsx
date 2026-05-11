@@ -1,11 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { ArrowLeft, Dumbbell, Activity, Calendar, Save, History, LineChart } from "lucide-react";
+import { ArrowLeft, Activity, Calendar, Save, LineChart } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { toast } from "sonner";
 import {
@@ -18,68 +19,180 @@ import {
   ResponsiveContainer
 } from 'recharts';
 
+const Model = dynamic(() => import('react-body-highlighter'), { ssr: false });
+
+// --- Mapa de nomes PT-BR para os slugs do body-highlighter ---
+const MUSCLE_NAMES: Record<string, string> = {
+  "chest": "Peitoral",
+  "triceps": "Tríceps",
+  "biceps": "Bíceps",
+  "front-deltoids": "Deltóide Frontal",
+  "back-deltoids": "Deltóide Posterior",
+  "upper-back": "Dorsal",
+  "lower-back": "Lombar",
+  "trapezius": "Trapézio",
+  "abs": "Abdômen",
+  "obliques": "Oblíquos",
+  "quadriceps": "Quadríceps",
+  "hamstring": "Isquiotibiais",
+  "gluteal": "Glúteos",
+  "calves": "Panturrilha",
+  "adductor": "Adutores",
+  "abductors": "Abdutores",
+  "forearm": "Antebraço",
+};
+
+// --- Composição biológica de cada grupo muscular ---
+const MUSCLE_BIO: Record<string, string[]> = {
+  "chest": [
+    "Peitoral maior (porção esternocostal e clavicular)",
+    "Peitoral menor",
+  ],
+  "triceps": [
+    "Tríceps — cabeça longa",
+    "Tríceps — cabeça lateral",
+    "Tríceps — cabeça medial",
+  ],
+  "biceps": [
+    "Bíceps — cabeça longa",
+    "Bíceps — cabeça curta",
+    "Braquial",
+  ],
+  "front-deltoids": [
+    "Deltóide — feixe anterior",
+  ],
+  "back-deltoids": [
+    "Deltóide — feixe posterior",
+    "Infraespinal",
+    "Redondo menor",
+  ],
+  "upper-back": [
+    "Latíssimo do dorso",
+    "Rombóide maior",
+    "Rombóide menor",
+    "Redondo maior",
+  ],
+  "lower-back": [
+    "Eretor da espinha — iliocostal",
+    "Eretor da espinha — longuíssimo",
+    "Eretor da espinha — espinal",
+    "Multífido",
+  ],
+  "trapezius": [
+    "Trapézio — feixe superior",
+    "Trapézio — feixe médio",
+    "Trapézio — feixe inferior",
+  ],
+  "abs": [
+    "Reto abdominal",
+    "Transverso do abdômen",
+  ],
+  "obliques": [
+    "Oblíquo externo",
+    "Oblíquo interno",
+  ],
+  "quadriceps": [
+    "Reto femoral",
+    "Vasto lateral",
+    "Vasto medial",
+    "Vasto intermédio",
+  ],
+  "hamstring": [
+    "Bíceps femoral",
+    "Semitendíneo",
+    "Semimembranoso",
+  ],
+  "gluteal": [
+    "Glúteo máximo",
+    "Glúteo médio",
+    "Glúteo mínimo",
+  ],
+  "calves": [
+    "Gastrocnêmio",
+    "Sóleo",
+  ],
+  "adductor": [
+    "Adutor longo",
+    "Adutor curto",
+    "Adutor magno",
+    "Grácil",
+    "Pectíneo",
+  ],
+  "abductors": [
+    "Glúteo médio",
+    "Tensor da fáscia lata",
+    "Glúteo mínimo",
+  ],
+  "forearm": [
+    "Braquiorradial",
+    "Flexor radial do carpo",
+    "Extensor radial longo do carpo",
+    "Pronador redondo",
+  ],
+};
+
 // --- Dados dos Treinos (Intermediário - 7 Dias) ---
 
 const TREINO_SEGUNDA = [ // Inferior - Foco Quadríceps
-  { nome: "Agachamento Livre ou Smith", series: "4", repeticoes: "10-12", video: "https://www.youtube.com/shorts/3uZE_E11eg4" },
-  { nome: "Leg Press 45º", series: "4", repeticoes: "10-12", video: "https://www.youtube.com/shorts/EotSw18oR9w" },
-  { nome: "Cadeira Extensora", series: "3", repeticoes: "12-15", video: "https://www.youtube.com/watch?v=wpvFnlVR4s4" },
-  { nome: "Agachamento Búlgaro", series: "3", repeticoes: "10-12 (cada)", video: "https://www.youtube.com/shorts/rltJymhFtHg" },
-  { nome: "Passada (Lunge)", series: "3", repeticoes: "20 passos totais", video: "https://www.youtube.com/shorts/rltJymhFtHg" },
-  { nome: "Abdominal Infra", series: "3", repeticoes: "15", video: "https://www.youtube.com/shorts/6Qz8M2u6q7E" }
+  { nome: "Agachamento Livre ou Smith", series: "4", repeticoes: "10-12", musculos: ["quadriceps", "gluteal", "hamstring", "lower-back"] },
+  { nome: "Leg Press 45º", series: "4", repeticoes: "10-12", musculos: ["quadriceps", "gluteal", "hamstring"] },
+  { nome: "Cadeira Extensora", series: "3", repeticoes: "12-15", musculos: ["quadriceps"] },
+  { nome: "Agachamento Búlgaro", series: "3", repeticoes: "10-12 (cada)", musculos: ["quadriceps", "gluteal", "hamstring"] },
+  { nome: "Passada (Lunge)", series: "3", repeticoes: "20 passos totais", musculos: ["quadriceps", "gluteal", "hamstring"] },
+  { nome: "Abdominal Infra", series: "3", repeticoes: "15", musculos: ["abs"] },
 ];
 
 const TREINO_TERCA = [ // Superior - Foco Empurrar (Push)
-  { nome: "Supino Reto (Halter ou Barra)", series: "4", repeticoes: "10-12", video: "https://www.youtube.com/watch?v=YiP-Zhk5YMk" },
-  { nome: "Supino Inclinado (Halter)", series: "3", repeticoes: "10-12", video: "https://www.youtube.com/watch?v=F4Q1g2z8MWM" },
-  { nome: "Desenvolvimento Militar/Halter", series: "3", repeticoes: "10-12", video: "https://www.youtube.com/watch?v=L-iQfHVeuVg" },
-  { nome: "Elevação Lateral", series: "4", repeticoes: "12-15", video: "https://www.youtube.com/watch?v=W5hRdgwEoEA" },
-  { nome: "Tríceps Testa ou Francês", series: "3", repeticoes: "10-12", video: "https://www.youtube.com/shorts/9IZIgdT5Mag" },
-  { nome: "Tríceps Corda", series: "3", repeticoes: "12-15", video: "https://www.youtube.com/shorts/u36jNfqh8_U" }
+  { nome: "Supino Reto (Halter ou Barra)", series: "4", repeticoes: "10-12", musculos: ["chest", "triceps", "front-deltoids"] },
+  { nome: "Supino Inclinado (Halter)", series: "3", repeticoes: "10-12", musculos: ["chest", "triceps", "front-deltoids"] },
+  { nome: "Desenvolvimento Militar/Halter", series: "3", repeticoes: "10-12", musculos: ["front-deltoids", "triceps", "trapezius"] },
+  { nome: "Elevação Lateral", series: "4", repeticoes: "12-15", musculos: ["front-deltoids", "trapezius"] },
+  { nome: "Tríceps Testa ou Francês", series: "3", repeticoes: "10-12", musculos: ["triceps"] },
+  { nome: "Tríceps Corda", series: "3", repeticoes: "12-15", musculos: ["triceps"] },
 ];
 
 const TREINO_QUARTA = [ // Inferior - Foco Posterior e Glúteo
-  { nome: "Stiff", series: "4", repeticoes: "10-12", video: "https://www.youtube.com/watch?v=uO7JvlaxXAk" },
-  { nome: "Elevação Pélvica", series: "4", repeticoes: "10-12", video: "https://www.youtube.com/shorts/ICdsKf6yTys" },
-  { nome: "Mesa Flexora", series: "4", repeticoes: "12", video: "https://www.youtube.com/shorts/c3cng1WqREQ" },
-  { nome: "Cadeira Flexora", series: "3", repeticoes: "12-15", video: "https://www.youtube.com/shorts/T46yKiz8laY" },
-  { nome: "Cadeira Abdutora", series: "3", repeticoes: "15-20", video: "https://www.youtube.com/shorts/2aEx45AyMYs" },
-  { nome: "Panturrilha em Pé", series: "4", repeticoes: "15-20", video: "" }
+  { nome: "Stiff", series: "4", repeticoes: "10-12", musculos: ["hamstring", "gluteal", "lower-back"] },
+  { nome: "Elevação Pélvica", series: "4", repeticoes: "10-12", musculos: ["gluteal", "hamstring"] },
+  { nome: "Mesa Flexora", series: "4", repeticoes: "12", musculos: ["hamstring"] },
+  { nome: "Cadeira Flexora", series: "3", repeticoes: "12-15", musculos: ["hamstring"] },
+  { nome: "Cadeira Abdutora", series: "3", repeticoes: "15-20", musculos: ["abductors", "gluteal"] },
+  { nome: "Panturrilha em Pé", series: "4", repeticoes: "15-20", musculos: ["calves"] },
 ];
 
 const TREINO_QUINTA = [ // Superior - Foco Puxar (Pull)
-  { nome: "Puxada Alta (Aberta)", series: "4", repeticoes: "10-12", video: "https://www.youtube.com/shorts/ftcql3-AMRs" },
-  { nome: "Remada Curvada (Barra ou Halter)", series: "4", repeticoes: "10", video: "https://www.youtube.com/shorts/j-OssGQT9kg" },
-  { nome: "Remada Baixa (Triângulo)", series: "3", repeticoes: "12", video: "https://www.youtube.com/shorts/7lc8Ow4vIwA" },
-  { nome: "Crucifixo Invertido / Face Pull", series: "3", repeticoes: "15", video: "https://www.youtube.com/shorts/cNcLfzEbOQk" },
-  { nome: "Rosca Direta (Barra ou Halter)", series: "3", repeticoes: "10-12", video: "https://www.youtube.com/shorts/4-9Kh81ephA" },
-  { nome: "Rosca Martelo", series: "3", repeticoes: "12", video: "https://www.youtube.com/watch?v=5vPGH1uTtbs" }
+  { nome: "Puxada Alta (Aberta)", series: "4", repeticoes: "10-12", musculos: ["upper-back", "biceps", "back-deltoids"] },
+  { nome: "Remada Curvada (Barra ou Halter)", series: "4", repeticoes: "10", musculos: ["upper-back", "lower-back", "biceps"] },
+  { nome: "Remada Baixa (Triângulo)", series: "3", repeticoes: "12", musculos: ["upper-back", "lower-back", "biceps"] },
+  { nome: "Crucifixo Invertido / Face Pull", series: "3", repeticoes: "15", musculos: ["back-deltoids", "upper-back", "trapezius"] },
+  { nome: "Rosca Direta (Barra ou Halter)", series: "3", repeticoes: "10-12", musculos: ["biceps"] },
+  { nome: "Rosca Martelo", series: "3", repeticoes: "12", musculos: ["biceps", "forearm"] },
 ];
 
 const TREINO_SEXTA = [ // Inferior - Completo / Metabólico
-  { nome: "Agachamento Sumô", series: "3", repeticoes: "12", video: "https://www.youtube.com/shorts/Qlof2sSafDg" },
-  { nome: "Hack Machine ou Leg Horizontal", series: "3", repeticoes: "12", video: "-" },
-  { nome: "Cadeira Extensora", series: "3", repeticoes: "15 (Drop-set na última)", video: "https://www.youtube.com/watch?v=wpvFnlVR4s4" },
-  { nome: "Cadeira Flexora", series: "3", repeticoes: "15", video: "https://www.youtube.com/shorts/T46yKiz8laY" },
-  { nome: "Glúteo na Polia ou Caneleira", series: "3", repeticoes: "15", video: "https://www.youtube.com/shorts/2aEx45AyMYs" },
-  { nome: "Panturrilha Sentado/Banco", series: "4", repeticoes: "15", video: "" }
+  { nome: "Agachamento Sumô", series: "3", repeticoes: "12", musculos: ["adductor", "gluteal", "quadriceps"] },
+  { nome: "Hack Machine ou Leg Horizontal", series: "3", repeticoes: "12", musculos: ["quadriceps"] },
+  { nome: "Cadeira Extensora", series: "3", repeticoes: "15 (Drop-set na última)", musculos: ["quadriceps"] },
+  { nome: "Cadeira Flexora", series: "3", repeticoes: "15", musculos: ["hamstring"] },
+  { nome: "Glúteo na Polia ou Caneleira", series: "3", repeticoes: "15", musculos: ["gluteal"] },
+  { nome: "Panturrilha Sentado/Banco", series: "4", repeticoes: "15", musculos: ["calves"] },
 ];
 
 const TREINO_SABADO = [ // Superior - Completo
-  { nome: "Desenvolvimento Arnold", series: "3", repeticoes: "10-12", video: "https://www.youtube.com/watch?v=3mX6Q3k-Z_0" },
-  { nome: "Puxada Alta Fechada (Triângulo)", series: "3", repeticoes: "10-12", video: "-" },
-  { nome: "Flexão de Braço (Apoio)", series: "3", repeticoes: "Falha", video: "https://www.youtube.com/shorts/qF4XqE-lT8" },
-  { nome: "Elevação Frontal + Lateral", series: "3", repeticoes: "10+10 (Bi-set)", video: "-" },
-  { nome: "Tríceps Banco", series: "3", repeticoes: "15", video: "https://www.youtube.com/shorts/6-12" },
-  { nome: "Rosca Alternada", series: "3", repeticoes: "12", video: "-" }
+  { nome: "Desenvolvimento Arnold", series: "3", repeticoes: "10-12", musculos: ["front-deltoids", "triceps"] },
+  { nome: "Puxada Alta Fechada (Triângulo)", series: "3", repeticoes: "10-12", musculos: ["upper-back", "biceps"] },
+  { nome: "Flexão de Braço (Apoio)", series: "3", repeticoes: "Falha", musculos: ["chest", "triceps", "front-deltoids"] },
+  { nome: "Elevação Frontal + Lateral", series: "3", repeticoes: "10+10 (Bi-set)", musculos: ["front-deltoids", "trapezius"] },
+  { nome: "Tríceps Banco", series: "3", repeticoes: "15", musculos: ["triceps", "chest"] },
+  { nome: "Rosca Alternada", series: "3", repeticoes: "12", musculos: ["biceps"] },
 ];
 
 const TREINO_DOMINGO = [ // Cardio / Recuperação Ativa
-  { nome: "Cardio Moderado (Esteira/Bike/Elíptico)", series: "1", repeticoes: "30-45 min", video: "-" },
-  { nome: "Prancha Abdominal", series: "3", repeticoes: "45s - 1min", video: "-" },
-  { nome: "Abdominal Supra (Colchonete)", series: "3", repeticoes: "20", video: "-" },
-  { nome: "Abdominal Oblíquo (Cruzado)", series: "3", repeticoes: "15 (cada lado)", video: "-" },
-  { nome: "Alongamento Geral", series: "1", repeticoes: "10 min", video: "-" }
+  { nome: "Cardio Moderado (Esteira/Bike/Elíptico)", series: "1", repeticoes: "30-45 min", musculos: [] },
+  { nome: "Prancha Abdominal", series: "3", repeticoes: "45s - 1min", musculos: ["abs", "obliques", "lower-back"] },
+  { nome: "Abdominal Supra (Colchonete)", series: "3", repeticoes: "20", musculos: ["abs"] },
+  { nome: "Abdominal Oblíquo (Cruzado)", series: "3", repeticoes: "15 (cada lado)", musculos: ["abs", "obliques"] },
+  { nome: "Alongamento Geral", series: "1", repeticoes: "10 min", musculos: [] },
 ];
 
 // --- Tipos e Estados ---
@@ -97,10 +210,9 @@ export default function TreinosPamela() {
   const [treinoFinal, setTreinoFinal] = useState<any[]>([]);
   const [tituloTreino, setTituloTreino] = useState<string>("");
 
-  // Estado para registro de peso
   const [exercicioSelecionado, setExercicioSelecionado] = useState<any>(null);
   const [novoPeso, setNovoPeso] = useState<string>("");
-  const [historicoPesos, setHistoricoPesos] = useState<Record<string, number>>({}); // Mapa: exercicio -> ultimo peso
+  const [historicoPesos, setHistoricoPesos] = useState<Record<string, number>>({});
   const [historicoCompleto, setHistoricoCompleto] = useState<ExerciseHistory[]>([]);
   const [showHistoryModal, setShowHistoryModal] = useState(false);
 
@@ -114,7 +226,6 @@ export default function TreinosPamela() {
     { nome: "Domingo", treino: TREINO_DOMINGO, titulo: "Cardio & Abdominais" },
   ];
 
-  // Carregar últimos pesos ao abrir um treino
   useEffect(() => {
     if (step === "RESULTADO" && treinoFinal.length > 0) {
       fetchLatestWeights();
@@ -123,12 +234,6 @@ export default function TreinosPamela() {
 
   const fetchLatestWeights = async () => {
     const exerciseNames = treinoFinal.map(e => e.nome);
-
-    // Busca o registro mais recente de cada exercícios
-    // Supabase não tem "DISTINCT ON" direto no JS simples em uma query só facilmente para mapear,
-    // então vamos buscar todo o histórico recente e filtrar no cliente ou fazer queries individuais.
-    // Para simplificar e não sobrecarregar, vamos buscar os ultimos 100 registros globais e filtrar.
-    // *Melhor*: Buscar individualmente ou usar uma RPC seria ideal, mas vamos pelo simples:
 
     const { data, error } = await supabase
       .from('training_history')
@@ -142,7 +247,6 @@ export default function TreinosPamela() {
     }
 
     const latestWeights: Record<string, number> = {};
-    // Preenche apenas com o primeiro encontrado (que é o mais recente devido ao sort)
     data?.forEach((record) => {
       if (!latestWeights[record.exercise_name]) {
         latestWeights[record.exercise_name] = record.weight;
@@ -176,9 +280,7 @@ export default function TreinosPamela() {
 
     const { error } = await supabase
       .from('training_history')
-      .insert([
-        { exercise_name: exerciseName, weight: pesoNum }
-      ]);
+      .insert([{ exercise_name: exerciseName, weight: pesoNum }]);
 
     if (error) {
       console.error("Erro ao salvar:", error);
@@ -186,7 +288,7 @@ export default function TreinosPamela() {
     } else {
       toast.success("Peso registrado!");
       setHistoricoPesos(prev => ({ ...prev, [exerciseName]: pesoNum }));
-      setNovoPeso(""); // Limpa input se quiser, ou mantem
+      setNovoPeso("");
     }
   };
 
@@ -195,7 +297,7 @@ export default function TreinosPamela() {
       .from('training_history')
       .select('created_at, weight')
       .eq('exercise_name', exerciseName)
-      .order('created_at', { ascending: true }); // Crescente para o gráfico
+      .order('created_at', { ascending: true });
 
     if (data) {
       const formattedData = data.map(d => ({
@@ -203,7 +305,7 @@ export default function TreinosPamela() {
         weight: d.weight
       }));
       setHistoricoCompleto(formattedData);
-      setExercicioSelecionado({ nome: exerciseName }); // Reusa estado para modal de titulo
+      setExercicioSelecionado({ nome: exerciseName, musculos: [] });
       setShowHistoryModal(true);
     }
   };
@@ -265,19 +367,35 @@ export default function TreinosPamela() {
                       className="flex flex-col md:flex-row md:items-center justify-between p-4 rounded-lg border bg-white shadow-sm hover:shadow-md transition-all gap-4"
                     >
                       {/* Info do Exercício */}
-                      <div className="flex items-start gap-4 flex-1 cursor-pointer" onClick={() => setExercicioSelecionado(ex)}>
+                      <div
+                        className="flex items-start gap-4 flex-1 cursor-pointer"
+                        onClick={() => { setExercicioSelecionado(ex); setShowHistoryModal(false); }}
+                      >
                         <div className="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-lg flex-shrink-0">
                           {idx + 1}
                         </div>
-                        <div>
+                        <div className="flex-1">
                           <h4 className="font-bold text-gray-800 text-lg hover:text-blue-600 transition-colors">
                             {ex.nome}
                           </h4>
                           <p className="text-sm text-gray-500">
                             {ex.series} séries x {ex.repeticoes} reps
                           </p>
+                          {/* Músculos trabalhados */}
+                          {ex.musculos.length > 0 && (
+                            <div className="flex flex-wrap gap-1 mt-1.5">
+                              {ex.musculos.map((slug: string) => (
+                                <span
+                                  key={slug}
+                                  className="text-xs bg-purple-100 text-purple-700 font-medium px-2 py-0.5 rounded-full"
+                                >
+                                  {MUSCLE_NAMES[slug] ?? slug}
+                                </span>
+                              ))}
+                            </div>
+                          )}
                           {historicoPesos[ex.nome] ? (
-                            <p className="text-xs text-green-600 font-semibold mt-1 flex items-center gap-1">
+                            <p className="text-xs text-green-600 font-semibold mt-1.5 flex items-center gap-1">
                               <Activity size={12} /> Última carga: {historicoPesos[ex.nome]}kg
                             </p>
                           ) : (
@@ -313,16 +431,6 @@ export default function TreinosPamela() {
                         >
                           <LineChart size={18} />
                         </Button>
-                        {ex.video && ex.video !== "-" && (
-                          <Button
-                            size="icon"
-                            variant="ghost"
-                            className="text-blue-500 hover:text-blue-700 hover:bg-blue-50"
-                            onClick={() => setExercicioSelecionado(ex)}
-                          >
-                            <Dumbbell size={18} />
-                          </Button>
-                        )}
                       </div>
                     </div>
                   ))}
@@ -332,20 +440,19 @@ export default function TreinosPamela() {
           </div>
         )}
 
-        {/* Modal de Detalhes (Vídeo) ou Histórico */}
+        {/* Modal de Detalhes ou Histórico */}
         <Dialog open={!!exercicioSelecionado} onOpenChange={(open) => {
           if (!open) {
             setExercicioSelecionado(null);
             setShowHistoryModal(false);
           }
         }}>
-          <DialogContent className="sm:max-w-md">
+          <DialogContent className="sm:max-w-md max-h-[90vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle>{exercicioSelecionado?.nome}</DialogTitle>
             </DialogHeader>
 
             {showHistoryModal ? (
-              // EXIBIÇÃO DO HISTÓRICO
               <div className="h-64 w-full">
                 {historicoCompleto.length > 0 ? (
                   <ResponsiveContainer width="100%" height="100%">
@@ -364,8 +471,8 @@ export default function TreinosPamela() {
                 )}
               </div>
             ) : (
-              // EXIBIÇÃO DE DETALHES DO EXERCÍCIO
               <div className="space-y-4">
+                {/* Séries e Reps */}
                 <div className="grid grid-cols-2 gap-4 text-center">
                   <div className="bg-gray-50 p-3 rounded-lg">
                     <span className="block text-sm text-gray-500">Séries</span>
@@ -377,15 +484,61 @@ export default function TreinosPamela() {
                   </div>
                 </div>
 
-                {exercicioSelecionado?.video && exercicioSelecionado.video !== "-" && (
-                  <div className="mt-4">
-                    <Button
-                      className="w-full bg-red-600 hover:bg-red-700 text-white"
-                      onClick={() => window.open(exercicioSelecionado.video, '_blank')}
-                    >
-                      Assistir Demonstração no YouTube
-                    </Button>
-                  </div>
+                {/* Músculos trabalhados */}
+                {exercicioSelecionado?.musculos?.length > 0 && (
+                  <>
+                    <div className="space-y-2">
+                      <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
+                        Músculos trabalhados
+                      </p>
+                      {exercicioSelecionado.musculos.map((slug: string) => (
+                        <div key={slug} className="bg-purple-50 rounded-lg px-3 py-2">
+                          <p className="text-sm font-semibold text-purple-700">
+                            {MUSCLE_NAMES[slug] ?? slug}
+                          </p>
+                          {MUSCLE_BIO[slug] && (
+                            <ul className="mt-1 space-y-0.5">
+                              {MUSCLE_BIO[slug].map((bio) => (
+                                <li key={bio} className="text-xs text-gray-500 italic">
+                                  · {bio}
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Body Highlighter SVG */}
+                    <div className="flex justify-center gap-2 pt-2">
+                      <div className="text-center">
+                        <p className="text-xs text-gray-400 mb-1">Frontal</p>
+                        <Model
+                          data={[{ name: exercicioSelecionado.nome, muscles: exercicioSelecionado.musculos }]}
+                          type="anterior"
+                          bodyColor="#e5e7eb"
+                          highlightedColors={["#7c3aed", "#a78bfa"]}
+                          style={{ width: "9rem" }}
+                        />
+                      </div>
+                      <div className="text-center">
+                        <p className="text-xs text-gray-400 mb-1">Posterior</p>
+                        <Model
+                          data={[{ name: exercicioSelecionado.nome, muscles: exercicioSelecionado.musculos }]}
+                          type="posterior"
+                          bodyColor="#e5e7eb"
+                          highlightedColors={["#7c3aed", "#a78bfa"]}
+                          style={{ width: "9rem" }}
+                        />
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                {exercicioSelecionado?.musculos?.length === 0 && (
+                  <p className="text-center text-sm text-gray-400 italic">
+                    Exercício de mobilidade / cardio geral
+                  </p>
                 )}
               </div>
             )}
