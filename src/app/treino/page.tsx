@@ -131,67 +131,69 @@ const MUSCLE_BIO: Record<string, string[]> = {
   ],
 };
 
-// --- Dados dos Treinos (Intermediário - 7 Dias) ---
+// --- Dados dos Treinos (Adaptado para Gestante - 7 Dias) ---
+// Adaptações: sem exercícios deitada de costas (supina) prolongados, sem séries até a falha,
+// sem drop-set, sem exercícios de equilíbrio/impacto de risco, sem trabalho direto de abdômen
+// (crunches/prancha) para evitar pressão intra-abdominal e diástase, cargas mais leves e reps mais altas.
+// Consulte sempre o médico/obstetra antes de iniciar ou manter o treino.
 
-const TREINO_SEGUNDA = [ // Inferior - Foco Quadríceps
-  { nome: "Agachamento Livre ou Smith", series: "4", repeticoes: "10-12", musculos: ["quadriceps", "gluteal", "hamstring", "lower-back"] },
-  { nome: "Leg Press 45º", series: "4", repeticoes: "10-12", musculos: ["quadriceps", "gluteal", "hamstring"] },
-  { nome: "Cadeira Extensora", series: "3", repeticoes: "12-15", musculos: ["quadriceps"] },
-  { nome: "Agachamento Búlgaro", series: "3", repeticoes: "10-12 (cada)", musculos: ["quadriceps", "gluteal", "hamstring"] },
-  { nome: "Passada (Lunge)", series: "3", repeticoes: "20 passos totais", musculos: ["quadriceps", "gluteal", "hamstring"] },
-  { nome: "Abdominal Infra", series: "3", repeticoes: "15", musculos: ["abs"] },
+const TREINO_SEGUNDA = [ // Inferior - Foco Quadríceps (com apoio, carga leve)
+  { nome: "Agachamento com Apoio (Cadeira/Smith)", series: "3", repeticoes: "12-15", musculos: ["quadriceps", "gluteal", "hamstring", "lower-back"] },
+  { nome: "Leg Press 45º (carga leve/moderada)", series: "3", repeticoes: "12-15", musculos: ["quadriceps", "gluteal", "hamstring"] },
+  { nome: "Cadeira Extensora (carga leve)", series: "3", repeticoes: "12-15", musculos: ["quadriceps"] },
+  { nome: "Passada Estática com Apoio", series: "3", repeticoes: "10-12 (cada)", musculos: ["quadriceps", "gluteal", "hamstring"] },
+  { nome: "Ativação de Assoalho Pélvico + Respiração Diafragmática", series: "3", repeticoes: "10 respirações", musculos: [] },
 ];
 
-const TREINO_TERCA = [ // Superior - Foco Empurrar (Push)
-  { nome: "Supino Reto (Halter ou Barra)", series: "4", repeticoes: "10-12", musculos: ["chest", "triceps", "front-deltoids"] },
-  { nome: "Supino Inclinado (Halter)", series: "3", repeticoes: "10-12", musculos: ["chest", "triceps", "front-deltoids"] },
-  { nome: "Desenvolvimento Militar/Halter", series: "3", repeticoes: "10-12", musculos: ["front-deltoids", "triceps", "trapezius"] },
-  { nome: "Elevação Lateral", series: "4", repeticoes: "12-15", musculos: ["front-deltoids", "trapezius"] },
-  { nome: "Tríceps Testa ou Francês", series: "3", repeticoes: "10-12", musculos: ["triceps"] },
-  { nome: "Tríceps Corda", series: "3", repeticoes: "12-15", musculos: ["triceps"] },
+const TREINO_TERCA = [ // Superior - Foco Empurrar (Push) - evitar posição deitada de costas
+  { nome: "Supino Inclinado (Halter, banco a 45º)", series: "3", repeticoes: "12-15", musculos: ["chest", "triceps", "front-deltoids"] },
+  { nome: "Press Sentado com Apoio nas Costas", series: "3", repeticoes: "12-15", musculos: ["chest", "triceps", "front-deltoids"] },
+  { nome: "Desenvolvimento Militar Sentado (Halter, carga leve)", series: "3", repeticoes: "12-15", musculos: ["front-deltoids", "triceps", "trapezius"] },
+  { nome: "Elevação Lateral (carga leve)", series: "3", repeticoes: "12-15", musculos: ["front-deltoids", "trapezius"] },
+  { nome: "Tríceps Corda (em pé, apoiada)", series: "3", repeticoes: "12-15", musculos: ["triceps"] },
 ];
 
-const TREINO_QUARTA = [ // Inferior - Foco Posterior e Glúteo
-  { nome: "Stiff", series: "4", repeticoes: "10-12", musculos: ["hamstring", "gluteal", "lower-back"] },
-  { nome: "Elevação Pélvica", series: "4", repeticoes: "10-12", musculos: ["gluteal", "hamstring"] },
-  { nome: "Mesa Flexora", series: "4", repeticoes: "12", musculos: ["hamstring"] },
-  { nome: "Cadeira Flexora", series: "3", repeticoes: "12-15", musculos: ["hamstring"] },
-  { nome: "Cadeira Abdutora", series: "3", repeticoes: "15-20", musculos: ["abductors", "gluteal"] },
-  { nome: "Panturrilha em Pé", series: "4", repeticoes: "15-20", musculos: ["calves"] },
+const TREINO_QUARTA = [ // Inferior - Foco Posterior e Glúteo (glúteo/assoalho pélvico)
+  { nome: "Stiff com Halteres Leves (amplitude reduzida)", series: "3", repeticoes: "12-15", musculos: ["hamstring", "gluteal", "lower-back"] },
+  { nome: "Elevação Pélvica (curta duração, com apoio no 3º trimestre)", series: "3", repeticoes: "12-15", musculos: ["gluteal", "hamstring"] },
+  { nome: "Cadeira Flexora (carga leve)", series: "3", repeticoes: "12-15", musculos: ["hamstring"] },
+  { nome: "Coice na Polia (em pé, apoiada)", series: "3", repeticoes: "12-15 (cada)", musculos: ["gluteal", "hamstring"] },
+  { nome: "Cadeira Abdutora (carga leve)", series: "3", repeticoes: "15-20", musculos: ["abductors", "gluteal"] },
+  { nome: "Panturrilha em Pé (com apoio)", series: "3", repeticoes: "15-20", musculos: ["calves"] },
 ];
 
-const TREINO_QUINTA = [ // Superior - Foco Puxar (Pull)
-  { nome: "Puxada Alta (Aberta)", series: "4", repeticoes: "10-12", musculos: ["upper-back", "biceps", "back-deltoids"] },
-  { nome: "Remada Curvada (Barra ou Halter)", series: "4", repeticoes: "10", musculos: ["upper-back", "lower-back", "biceps"] },
-  { nome: "Remada Baixa (Triângulo)", series: "3", repeticoes: "12", musculos: ["upper-back", "lower-back", "biceps"] },
+const TREINO_QUINTA = [ // Superior - Foco Puxar (Pull) - evitar flexão de tronco sob carga
+  { nome: "Puxada Alta (Aberta, carga moderada)", series: "3", repeticoes: "12-15", musculos: ["upper-back", "biceps", "back-deltoids"] },
+  { nome: "Remada Baixa Sentada (Triângulo, coluna apoiada)", series: "3", repeticoes: "12-15", musculos: ["upper-back", "lower-back", "biceps"] },
+  { nome: "Remada Unilateral Apoiada no Banco (carga leve)", series: "3", repeticoes: "12 (cada)", musculos: ["upper-back", "lower-back", "biceps"] },
   { nome: "Crucifixo Invertido / Face Pull", series: "3", repeticoes: "15", musculos: ["back-deltoids", "upper-back", "trapezius"] },
-  { nome: "Rosca Direta (Barra ou Halter)", series: "3", repeticoes: "10-12", musculos: ["biceps"] },
-  { nome: "Rosca Martelo", series: "3", repeticoes: "12", musculos: ["biceps", "forearm"] },
+  { nome: "Rosca Direta (Halter, carga leve)", series: "3", repeticoes: "12-15", musculos: ["biceps"] },
+  { nome: "Rosca Martelo (carga leve)", series: "3", repeticoes: "12-15", musculos: ["biceps", "forearm"] },
 ];
 
-const TREINO_SEXTA = [ // Inferior - Completo / Metabólico
-  { nome: "Agachamento Sumô", series: "3", repeticoes: "12", musculos: ["adductor", "gluteal", "quadriceps"] },
-  { nome: "Hack Machine ou Leg Horizontal", series: "3", repeticoes: "12", musculos: ["quadriceps"] },
-  { nome: "Cadeira Extensora", series: "3", repeticoes: "15 (Drop-set na última)", musculos: ["quadriceps"] },
+const TREINO_SEXTA = [ // Inferior - Completo / Baixo Impacto
+  { nome: "Agachamento Sumô (carga leve, com apoio)", series: "3", repeticoes: "12-15", musculos: ["adductor", "gluteal", "quadriceps"] },
+  { nome: "Leg Press Horizontal (carga leve/moderada)", series: "3", repeticoes: "12-15", musculos: ["quadriceps"] },
+  { nome: "Cadeira Extensora (sem drop-set)", series: "3", repeticoes: "15", musculos: ["quadriceps"] },
   { nome: "Cadeira Flexora", series: "3", repeticoes: "15", musculos: ["hamstring"] },
   { nome: "Glúteo na Polia ou Caneleira", series: "3", repeticoes: "15", musculos: ["gluteal"] },
-  { nome: "Panturrilha Sentado/Banco", series: "4", repeticoes: "15", musculos: ["calves"] },
+  { nome: "Panturrilha Sentado/Banco", series: "3", repeticoes: "15", musculos: ["calves"] },
 ];
 
-const TREINO_SABADO = [ // Superior - Completo
-  { nome: "Desenvolvimento Arnold", series: "3", repeticoes: "10-12", musculos: ["front-deltoids", "triceps"] },
-  { nome: "Puxada Alta Fechada (Triângulo)", series: "3", repeticoes: "10-12", musculos: ["upper-back", "biceps"] },
-  { nome: "Flexão de Braço (Apoio)", series: "3", repeticoes: "Falha", musculos: ["chest", "triceps", "front-deltoids"] },
-  { nome: "Elevação Frontal + Lateral", series: "3", repeticoes: "10+10 (Bi-set)", musculos: ["front-deltoids", "trapezius"] },
-  { nome: "Tríceps Banco", series: "3", repeticoes: "15", musculos: ["triceps", "chest"] },
-  { nome: "Rosca Alternada", series: "3", repeticoes: "12", musculos: ["biceps"] },
+const TREINO_SABADO = [ // Superior - Completo (carga leve, sem falha)
+  { nome: "Desenvolvimento Sentado com Halteres Leves", series: "3", repeticoes: "12-15", musculos: ["front-deltoids", "triceps"] },
+  { nome: "Puxada Alta Fechada (Triângulo)", series: "3", repeticoes: "12-15", musculos: ["upper-back", "biceps"] },
+  { nome: "Flexão Inclinada (na barra/parede ou banco)", series: "3", repeticoes: "12-15", musculos: ["chest", "triceps", "front-deltoids"] },
+  { nome: "Elevação Lateral (carga leve)", series: "3", repeticoes: "12-15", musculos: ["front-deltoids", "trapezius"] },
+  { nome: "Tríceps Corda (em pé)", series: "3", repeticoes: "15", musculos: ["triceps", "chest"] },
+  { nome: "Rosca Alternada (carga leve)", series: "3", repeticoes: "12-15", musculos: ["biceps"] },
 ];
 
-const TREINO_DOMINGO = [ // Cardio / Recuperação Ativa
-  { nome: "Cardio Moderado (Esteira/Bike/Elíptico)", series: "1", repeticoes: "30-45 min", musculos: [] },
-  { nome: "Prancha Abdominal", series: "3", repeticoes: "45s - 1min", musculos: ["abs", "obliques", "lower-back"] },
-  { nome: "Abdominal Supra (Colchonete)", series: "3", repeticoes: "20", musculos: ["abs"] },
-  { nome: "Abdominal Oblíquo (Cruzado)", series: "3", repeticoes: "15 (cada lado)", musculos: ["abs", "obliques"] },
+const TREINO_DOMINGO = [ // Cardio Leve / Mobilidade / Core Seguro
+  { nome: "Cardio Leve a Moderado (Caminhada/Bike Ergométrica/Elíptico)", series: "1", repeticoes: "20-30 min", musculos: [] },
+  { nome: "Ativação de Transverso Abdominal (Respiração, em pé ou 4 apoios)", series: "3", repeticoes: "10 respirações", musculos: ["abs"] },
+  { nome: "Gato-Camelo (Mobilidade de Coluna, 4 apoios)", series: "2", repeticoes: "10-12", musculos: ["lower-back", "abs"] },
+  { nome: "Inclinação Pélvica em Pé", series: "2", repeticoes: "12-15", musculos: ["abs", "gluteal"] },
   { nome: "Alongamento Geral", series: "1", repeticoes: "10 min", musculos: [] },
 ];
 
@@ -217,13 +219,13 @@ export default function TreinosPamela() {
   const [showHistoryModal, setShowHistoryModal] = useState(false);
 
   const diasSemana = [
-    { nome: "Segunda-feira", treino: TREINO_SEGUNDA, titulo: "Inferior - Foco Quadríceps" },
+    { nome: "Segunda-feira", treino: TREINO_SEGUNDA, titulo: "Inferior - Foco Quadríceps (Apoio)" },
     { nome: "Terça-feira", treino: TREINO_TERCA, titulo: "Superior - Push (Empurrar)" },
     { nome: "Quarta-feira", treino: TREINO_QUARTA, titulo: "Inferior - Foco Posterior/Glúteo" },
     { nome: "Quinta-feira", treino: TREINO_QUINTA, titulo: "Superior - Pull (Puxar)" },
-    { nome: "Sexta-feira", treino: TREINO_SEXTA, titulo: "Inferior - Completo/Metabólico" },
-    { nome: "Sábado", treino: TREINO_SABADO, titulo: "Superior - Completo" },
-    { nome: "Domingo", treino: TREINO_DOMINGO, titulo: "Cardio & Abdominais" },
+    { nome: "Sexta-feira", treino: TREINO_SEXTA, titulo: "Inferior - Completo/Baixo Impacto" },
+    { nome: "Sábado", treino: TREINO_SABADO, titulo: "Superior - Completo (Carga Leve)" },
+    { nome: "Domingo", treino: TREINO_DOMINGO, titulo: "Cardio Leve & Core Seguro" },
   ];
 
   useEffect(() => {
@@ -317,13 +319,19 @@ export default function TreinosPamela() {
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
-            Treinos da Pamela
+            Treinos da Pamela — Gestante
           </h1>
           {step !== "DIA" && (
             <Button variant="ghost" onClick={handleBack} className="flex items-center gap-2">
               <ArrowLeft size={16} /> Voltar
             </Button>
           )}
+        </div>
+
+        <div className="mb-6 text-xs text-amber-800 bg-amber-50 border border-amber-200 rounded-lg px-4 py-3">
+          Treino adaptado para gestante: sem exercícios deitada de costas prolongados, sem séries até a falha,
+          sem drop-set e sem trabalho direto de abdômen. Consulte sempre seu médico/obstetra antes de iniciar
+          ou manter a atividade física.
         </div>
 
         {/* STEP 1: Seleção do Dia */}
@@ -356,7 +364,7 @@ export default function TreinosPamela() {
                   {tituloTreino}
                 </CardTitle>
                 <p className="text-center text-blue-100 mt-2">
-                  {diaSelecionado} - Nível Intermediário
+                  {diaSelecionado} - Adaptado para Gestante
                 </p>
               </CardHeader>
               <CardContent className="p-6">
